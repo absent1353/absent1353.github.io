@@ -623,7 +623,45 @@
 <td align="center">x单精度，返回(int)Math.floor(x+0.5) 如果x双精度，返回(long)Math.floor(x+0.5)</td>
 </tr>
 </tbody></table>
-<h3 id="4-String类型"><a href="#4-String类型" class="headerlink" title="4.String类型"></a>4.String类型</h3><p><code>String</code>实际上与<code>System</code>类和<code>Scanner</code>类一样，都是Java库的一个预定义的类。String类型不是基本类型，而是<strong>引用类型</strong>(reference type).</p>
+<h3 id="4-String类型"><a href="#4-String类型" class="headerlink" title="4.String类型"></a>4.String类型</h3><p><code>String</code>实际上与<code>System</code>类和<code>Scanner</code>类一样，都是Java库的一个预定义的类。String类型不是基本类型，而是<strong>引用类型</strong>(reference type)。任何一个Java类都可以作为引用类型来声明一个变量。使用引用类型声明的变量称为引用变量，它引用一个对象，如：</p>
+<pre class=" language-java"><code class="language-java">String message <span class="token operator">=</span> “Welcome to Java"    
+</code></pre>
+<p>message就是一个引用变量，引用一个内容为Welcome to Java的字符串对象。</p>
+<p>String的方法有</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">length()</td>
+<td align="center">字符统计</td>
+</tr>
+<tr>
+<td align="center">charAt(index)</td>
+<td align="center">返回指定位置的字符</td>
+</tr>
+<tr>
+<td align="center">concat(s1)</td>
+<td align="center">本字符串和s1连接，返回一个新的字符串</td>
+</tr>
+<tr>
+<td align="center">toUpperCase()</td>
+<td align="center">返回一个新的字符串，所有字母大写</td>
+</tr>
+<tr>
+<td align="center">toLowerCase()</td>
+<td align="center">返回一个新的字符串，所有字母小写</td>
+</tr>
+<tr>
+<td align="center">trim()</td>
+<td align="center">返回一个新的字符串，去掉了两边的空白字符</td>
+</tr>
+</tbody></table>
+<p>String是Java中的对象，上面的方法只能从一个特定的字符串实例来调用，所以这些方法称为<strong>实例方法</strong>，而非实例方法称为<strong>静态方法</strong>，静态方法可以不使用对象来调用。如定义在<code>Math</code>类中的所有的方法都是静态方法，它们没有绑定到一个特定的对象实例上，而调用一个实例方法的语法是 <code>reference-Variable.methodName(arguments)</code>，一个方法可以有多个参数，或者没有参数。调用静态方法的语法为<code>ClassName.methodName(arguments)</code>。二者区别是，静态方法又可以看作为类方法，不需要对象的存在；而实例方法，又叫对象方法，必须建立在有一个对象的前提的基础上。</p>
+<p>对于字符串的连接，可以使用加号(+)连接两个或多个字符串，若要加号(+)实现连接功能，至少要有一个操作数必须是字符串。</p>
 
                 
             </div>
