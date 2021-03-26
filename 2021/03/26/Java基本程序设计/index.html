@@ -477,9 +477,9 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Java基本程序设计"><a href="#Java基本程序设计" class="headerlink" title="Java基本程序设计"></a>Java基本程序设计</h1><h3 id="目标："><a href="#目标：" class="headerlink" title="目标："></a>目标：</h3><p>1.使用Scanner类从控制台获取输入</p>
-<p>2.</p>
-<p>关于时间的一个简单例程：</p>
+                <h1 id="Java基本程序设计"><a href="#Java基本程序设计" class="headerlink" title="Java基本程序设计"></a>Java基本程序设计</h1><h3 id="目标："><a href="#目标：" class="headerlink" title="目标："></a>目标：</h3><p>1.Java的<code>System.currentTimeMills()</code> 使用</p>
+<p>2.<code>Scanner</code>类初探</p>
+<h3 id="1-时间获取"><a href="#1-时间获取" class="headerlink" title="1.时间获取"></a>1.时间获取</h3><p>关于时间的一个简单例程：</p>
 <pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> JavaEE_basis<span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">/**
@@ -501,7 +501,129 @@
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<p>首先定义一个类，main方法中实现时间的获取，调用<code>System.currentTimeMills()</code>获取1970年1月1日午夜到现在毫秒数。</p>
+<p>首先定义一个类，main方法中实现时间的获取，调用<code>System.currentTimeMills()</code>获取1970年1月1日午夜到现在毫秒数，然后分别采用整数相除和取余运算获取当前的秒，分，小时。</p>
+<h3 id="2-Scanner类"><a href="#2-Scanner类" class="headerlink" title="2.Scanner类"></a>2.<code>Scanner</code>类</h3><p>基础语法为</p>
+<pre class=" language-java"><code class="language-java">Scanner input <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<p>使用<code>next</code>方法接收</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> JavaEE_basis<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Scanner<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * @className: Demo01
+ * @description: TODO
+ * @author: Fqy
+ * @date: 2021/3/26
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo01</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">final</span> Scanner scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"使用next方法接收："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>scanner<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            String str <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"输入内容是："</span><span class="token operator">+</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        scanner<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>使用<code>nextline()</code> 接收</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> JavaEE_basis<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Scanner<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * @className: Demo02
+ * @description: TODO
+ * @author: Fqy
+ * @date: 2021/3/26
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Demo02</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">final</span> Scanner scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"使用next方法接收："</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>scanner<span class="token punctuation">.</span><span class="token function">hasNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">final</span> String str <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"输入的内容为："</span><span class="token operator">+</span>str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment" spellcheck="true">// 凡是属于IO流的类，如果不关闭会一直占用资源，养成良好的习惯。</span>
+        scanner<span class="token punctuation">.</span><span class="token function">close</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre>
+<h4 id="关于next与nextLine的区别："><a href="#关于next与nextLine的区别：" class="headerlink" title="关于next与nextLine的区别："></a>关于<code>next</code>与<code>nextLine</code>的区别：</h4><h5 id="next"><a href="#next" class="headerlink" title="next():"></a><code>next()</code>:</h5><p>1.一定要读取到有效字符后才可以结束输入</p>
+<p>2.对输入有效字符之前遇到的空白，<code>next()</code>方法自动将其去掉，比如 “hello world”中间的空格</p>
+<p>3.next() 不能得到带有空格的字符串</p>
+<h5 id="nextLine"><a href="#nextLine" class="headerlink" title="nextLine():"></a><code>nextLine()</code>:</h5><p>1.以Enter为结束符，nextLine()方法返回的是输入回车之前的所有字符</p>
+<p>2.可以获取空白</p>
+<h3 id="3-数学函数"><a href="#3-数学函数" class="headerlink" title="3. 数学函数"></a>3. 数学函数</h3><h4 id="三角函数方法"><a href="#三角函数方法" class="headerlink" title="三角函数方法"></a>三角函数方法</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sin(radians)</td>
+<td align="center">弧度为单位的正弦</td>
+</tr>
+<tr>
+<td>cos(radians)</td>
+<td align="center">弧度为单位的余弦</td>
+</tr>
+<tr>
+<td>tan(radians)</td>
+<td align="center">弧度为单位的正切</td>
+</tr>
+<tr>
+<td>toRadians(radians)</td>
+<td align="center">以度为单位的角度转为弧度</td>
+</tr>
+<tr>
+<td>toDegrees(radians)</td>
+<td align="center">弧度为单位角度转为度</td>
+</tr>
+<tr>
+<td>asin(radians)</td>
+<td align="center">弧度为单位的反三角正弦</td>
+</tr>
+<tr>
+<td>acos(radians)</td>
+<td align="center">弧度为单位的反三角余弦</td>
+</tr>
+<tr>
+<td>atan(radians)</td>
+<td align="center">弧度为单位的反三角正切</td>
+</tr>
+</tbody></table>
+<p>取整方法</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ceil(x)</td>
+<td align="center">向上取整，该整数作为一个双精度值返回</td>
+</tr>
+<tr>
+<td align="center">floor(x)</td>
+<td align="center">向下取整，该整数作为一个双精度值返回</td>
+</tr>
+<tr>
+<td align="center">rint(x)</td>
+<td align="center">x取整为他最接近的整数，该整数作为一个双精度值返回</td>
+</tr>
+<tr>
+<td align="center">round(x)</td>
+<td align="center">x单精度，返回(int)Math.floor(x+0.5) 如果x双精度，返回(long)Math.floor(x+0.5)</td>
+</tr>
+</tbody></table>
+<h3 id="4-String类型"><a href="#4-String类型" class="headerlink" title="4.String类型"></a>4.String类型</h3><p><code>String</code>实际上与<code>System</code>类和<code>Scanner</code>类一样，都是Java库的一个预定义的类。String类型不是基本类型，而是<strong>引用类型</strong>(reference type).</p>
 
                 
             </div>
