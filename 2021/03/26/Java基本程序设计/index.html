@@ -662,6 +662,203 @@
 </tbody></table>
 <p>String是Java中的对象，上面的方法只能从一个特定的字符串实例来调用，所以这些方法称为<strong>实例方法</strong>，而非实例方法称为<strong>静态方法</strong>，静态方法可以不使用对象来调用。如定义在<code>Math</code>类中的所有的方法都是静态方法，它们没有绑定到一个特定的对象实例上，而调用一个实例方法的语法是 <code>reference-Variable.methodName(arguments)</code>，一个方法可以有多个参数，或者没有参数。调用静态方法的语法为<code>ClassName.methodName(arguments)</code>。二者区别是，静态方法又可以看作为类方法，不需要对象的存在；而实例方法，又叫对象方法，必须建立在有一个对象的前提的基础上。</p>
 <p>对于字符串的连接，可以使用加号(+)连接两个或多个字符串，若要加号(+)实现连接功能，至少要有一个操作数必须是字符串。</p>
+<h4 id="字符串的比较"><a href="#字符串的比较" class="headerlink" title="字符串的比较"></a>字符串的比较</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>equals(s)</td>
+<td>该字符串等于字符串s，返回true</td>
+</tr>
+<tr>
+<td>equalsIgnoreCase(s1)</td>
+<td>不区分大小写的判断与s1相等</td>
+</tr>
+<tr>
+<td>compareTo(s)</td>
+<td>返回一个大于0，等于0，小于0的整数，标名该字符串是否大于等于或者小于s</td>
+</tr>
+<tr>
+<td>copareToIgnoreCase(s)</td>
+<td>与compareTo一样，只是不区分大小写</td>
+</tr>
+<tr>
+<td>startsWith(prefix)</td>
+<td>如果字符串以特定的前缀开始，返回true</td>
+</tr>
+<tr>
+<td>endsWidth(suffix)</td>
+<td>如果字符串以特定的后缀结束，返回true</td>
+</tr>
+<tr>
+<td>contains(s)</td>
+<td>如果s是该字符串的子字符串，返回true</td>
+</tr>
+</tbody></table>
+<p>切记，比较两个字符串是否相等不能用 == ，因为 == 只能检测两个字符串string1和string2是否指向同一个对象。</p>
+<h4 id="获得子字符串"><a href="#获得子字符串" class="headerlink" title="获得子字符串"></a>获得子字符串</h4><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>substring(beginIndex)</td>
+<td>返回该字符串的子串，从指定位置beginIndex字符开始到字符串的结尾</td>
+</tr>
+<tr>
+<td>substring(beginIndex,endIndex)</td>
+<td>返回该字符串的子串，从指定位置beginIndex字符开始到字符串下标为endIndex-1的字符</td>
+</tr>
+</tbody></table>
+<p>几个indexOf和lastIndexOf方法，获取字符串中的字符或一个子串，如下表</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>indexOf(ch)</td>
+<td>返回字符串中出现的第一个ch的下标，如果没有匹配到，返回-1</td>
+</tr>
+<tr>
+<td>indexOf(ch, fromIndex)</td>
+<td>返回字符串中fromIndex之后出现的第一个ch下标，如果没有匹配到，返回-1</td>
+</tr>
+<tr>
+<td>indexOf(s)</td>
+<td>返回字符串中出现的第一个字符串s的下标，如果没有匹配到，返回-1</td>
+</tr>
+<tr>
+<td>indexOf(s, fromIndex)</td>
+<td>返回字符串中fromIndex之后出现的第一个字符串s的下标，如果没有匹配到，返回-1</td>
+</tr>
+<tr>
+<td>lastIndexOf(ch)</td>
+<td>返回字符串中出现的最后一个ch的下标，如果没有匹配到，返回-1</td>
+</tr>
+<tr>
+<td>lastIndexOf(ch,fromIndex)</td>
+<td>返回字符串中fromIndex之前出现的第一个字符ch的下标，如果没有匹配到，返回-1</td>
+</tr>
+<tr>
+<td>lastIndexOf(s)</td>
+<td>返回字符串中出现的最后一个字符串s的下标，如果没有匹配到，返回-1</td>
+</tr>
+<tr>
+<td>lastIndexOf(s,fromIndex)</td>
+<td>返回字符串中fromIndex之前出现的第一个字符串s的下标，如果没有匹配到，返回-1</td>
+</tr>
+</tbody></table>
+<h4 id="字符串与数字之间的转换"><a href="#字符串与数字之间的转换" class="headerlink" title="字符串与数字之间的转换"></a>字符串与数字之间的转换</h4><pre class=" language-java"><code class="language-java"><span class="token keyword">int</span> intValue <span class="token operator">=</span> Integer<span class="token punctuation">.</span><span class="token function">parseInt</span><span class="token punctuation">(</span>intString<span class="token punctuation">)</span>
+</code></pre>
+<p>字符串转化为double值</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">double</span> doubleValue <span class="token operator">=</span> Double<span class="token punctuation">.</span><span class="token function">parseDouble</span><span class="token punctuation">(</span>doubleString<span class="token punctuation">)</span>
+</code></pre>
+<p>Integer和Double类都包含在java.lang包中，自动导入的，如果将数值转化为字符串，只需要简单使用字符串的连接操作符</p>
+<pre class=" language-java"><code class="language-java">String s <span class="token operator">=</span> number <span class="token operator">+</span> <span class="token string">""</span><span class="token punctuation">;</span>
+</code></pre>
+<p>学习实例，将16进制转为10进制</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> JavaEE_basis<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Scanner<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * @className: HexDigit2Dec
+ * @description: TODO
+ * @author: Fqy
+ * @date: 2021/3/26
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HexDigit2Dec</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">final</span> Scanner scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Enter the hex number: "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">final</span> String hexString <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>hexString<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">!=</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"You must enter one character"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">final</span> <span class="token keyword">char</span> ch <span class="token operator">=</span> Character<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span>hexString<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token string">'A'</span><span class="token operator">&lt;=</span>ch <span class="token operator">&amp;&amp;</span> ch <span class="token operator">&lt;=</span><span class="token string">'F'</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">int</span> value <span class="token operator">=</span> ch <span class="token operator">-</span> <span class="token string">'A'</span> <span class="token operator">+</span> <span class="token number">10</span><span class="token punctuation">;</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"The decimal for hex digit"</span>
+                    <span class="token operator">+</span> ch <span class="token operator">+</span> <span class="token string">" is "</span><span class="token operator">+</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>Character<span class="token punctuation">.</span><span class="token function">isDigit</span><span class="token punctuation">(</span>ch<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"The decimal value for hex digit "</span><span class="token operator">+</span> ch <span class="token operator">+</span> <span class="token string">" is "</span><span class="token operator">+</span>ch<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">else</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>ch<span class="token operator">+</span><span class="token string">" is an invalid input"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>实例2 彩票游戏</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> JavaEE_basis<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Scanner<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * @className: LotteryUsingStrings
+ * @description: TODO
+ * @author: Fqy
+ * @date: 2021/3/26
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">LotteryUsingStrings</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        String lottery <span class="token operator">=</span> <span class="token string">""</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">*</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">final</span> Scanner scanner <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Scanner</span><span class="token punctuation">(</span>System<span class="token punctuation">.</span>in<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Enter your lottery pick two digits:"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">final</span> String guess <span class="token operator">=</span> scanner<span class="token punctuation">.</span><span class="token function">nextLine</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">char</span> lotteryDigit1 <span class="token operator">=</span> lottery<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">final</span> <span class="token keyword">char</span> lotteryDigit2 <span class="token operator">=</span> lottery<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">char</span> guessDigit1 <span class="token operator">=</span> guess<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">char</span> guessDigit2 <span class="token operator">=</span> guess<span class="token punctuation">.</span><span class="token function">charAt</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"The lottery number is "</span><span class="token operator">+</span>lottery<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">if</span><span class="token punctuation">(</span>guess<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>lottery<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Exact match: $10,000"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>guessDigit2<span class="token operator">==</span>lotteryDigit1<span class="token operator">&amp;&amp;</span>guessDigit1<span class="token operator">==</span>lotteryDigit2<span class="token punctuation">)</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Match all digits, win $3,000"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>guessDigit1<span class="token operator">==</span>lotteryDigit1<span class="token operator">||</span>guessDigit1<span class="token operator">==</span>lotteryDigit2<span class="token operator">||</span>guessDigit2<span class="token operator">==</span>lotteryDigit1<span class="token operator">||</span>guessDigit2<span class="token operator">==</span>lotteryDigit2<span class="token punctuation">)</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Match one digit, win $1,000"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"Sorry,not match"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="5-格式化输出"><a href="#5-格式化输出" class="headerlink" title="5. 格式化输出"></a>5. 格式化输出</h3><p>举例说明</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> JavaEE_basis<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * @className: FormatDemo
+ * @description: TODO
+ * @author: Fqy
+ * @date: 2021/3/26
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FormatDemo</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%-10s%-10s%-10s%-10s%-10s\n"</span><span class="token punctuation">,</span><span class="token string">"Degree"</span><span class="token punctuation">,</span><span class="token string">"Radians"</span><span class="token punctuation">,</span><span class="token string">"Sine"</span><span class="token punctuation">,</span><span class="token string">"Cosine"</span><span class="token punctuation">,</span><span class="token string">"Tangent"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> degrees <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
+        <span class="token keyword">double</span> radians <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">toRadians</span><span class="token punctuation">(</span>degrees<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%-10d%-10.4f%-10.4f%-10.4f%-10.4f\n"</span><span class="token punctuation">,</span>degrees<span class="token punctuation">,</span>radians<span class="token punctuation">,</span>Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span>radians<span class="token punctuation">)</span><span class="token punctuation">,</span>Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span>radians<span class="token punctuation">)</span><span class="token punctuation">,</span>Math<span class="token punctuation">.</span><span class="token function">tan</span><span class="token punctuation">(</span>radians<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        degrees <span class="token operator">=</span> <span class="token number">60</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%-10d%-10.4f%-10.4f%-10.4f%-10.4f\n"</span><span class="token punctuation">,</span>degrees<span class="token punctuation">,</span>radians<span class="token punctuation">,</span>Math<span class="token punctuation">.</span><span class="token function">sin</span><span class="token punctuation">(</span>radians<span class="token punctuation">)</span><span class="token punctuation">,</span>Math<span class="token punctuation">.</span><span class="token function">cos</span><span class="token punctuation">(</span>radians<span class="token punctuation">)</span><span class="token punctuation">,</span>Math<span class="token punctuation">.</span><span class="token function">tan</span><span class="token punctuation">(</span>radians<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>结果为：</p>
+<p>Degree    Radians   Sine      Cosine    Tangent<br>        30        0.5236    0.5000    0.8660    0.5774<br>        60        0.5236    0.5000    0.8660    0.5774   </p>
+<p>使用格式限定符%-10s来显示字符串，对字符串进行左对齐，使用%-10d来显示整数，使用%-10.4f来显示单精度浮点数。</p>
 
                 
             </div>
