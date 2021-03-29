@@ -525,8 +525,17 @@
 <p>​                                         $$E = -\log y_j^{*} = -u_j + \log\sum_{j^{‘}=1}^{V}\exp(u_{j^{‘}}) \tag{9}$$</p>
 <p>求$E$ 对 $u_j$ 偏导数为:</p>
 <p>​                                                                                       $$\frac{\partial E}{\partial u_j} =-t_j+\frac{\exp(u_j)}{\sum_{j^{‘}=1}^{V}\exp(u_{j^{‘}})}=y_j-t_j=e_j \tag{10}$$</p>
-<p>6.多个词上下文</p>
-<p>7.Skip-Gram模型</p>
+<p>如果这个差值很大,说明模型预测的不好,参数需要调整很大,反之则不需要调整参数,根据链式法则,求E对参数$w_{ij}^{‘}$的导数:</p>
+<p>$$\frac{\partial E}{\partial w_{ij}^{‘}}=\frac{\partial E}{\partial u_j}\frac{\partial u_j}{\partial w_{ij}^{‘}}=e_j \cdot h_i \tag{11}$$</p>
+<p>采用Gradient Descent更新参数:</p>
+<p>​                                                              $$w_{ij}^{‘new} = w_{ij}^{‘old}-\eta \cdot e_j \cdot h_i \tag{12}$$</p>
+<p>求$E$对隐层的输出$h_i$的梯度:</p>
+<p>​                                                                               $$\frac{\partial E}{\partial h_i} = \sum \limits_{j=1}^V \frac{\partial E}{\partial u_j} \frac{\partial u_j}{\partial h_i} =\sum \limits_{j=1}{V}e_j \cdot w_{ij}^{‘} = EH_i\tag{13}$$</p>
+<p>由于$h_i = \sum_{k=1}^{V} x_k \cdot w_{ki}$, 所以可以求出:</p>
+<p>$$\frac{\partial E}{\partial w_{ki}} = \frac{\partial E}{\partial h_i} \cdot \frac{\partial h_i}{\partial w_{ki}} = EH_i \cdot x_k \tag{14}$$</p>
+<p>向量形式为$\frac{\partial E}{\partial W} = X \bigotimes EH^T$,是一个$V \times N$ 的矩阵, 但是$x$ 只有一个元素非零,因此$\frac{\partial E}{\partial W}$只有一个行非零,所以梯度下降对于W只需要更新输入$w_I$ 对应的那一个(行)向量</p>
+<p>​                                                             $$v_{w_I}^{new} \leftarrow v_{w_I}^{old} - \eta EH^T  \tag{15}$$</p>
+<h3 id="4-3-Multi-word-CBOW模型"><a href="#4-3-Multi-word-CBOW模型" class="headerlink" title="4.3.Multi-word CBOW模型"></a>4.3.Multi-word CBOW模型</h3><p>7.Skip-Gram模型</p>
 <p>8.计算效率</p>
 <p>9.Hierarchical Softmax</p>
 <p>10.Negative Sampling</p>
