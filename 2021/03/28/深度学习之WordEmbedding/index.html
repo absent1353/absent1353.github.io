@@ -549,11 +549,12 @@
 
 <p>与CBOW模型一致，依然采用$v_{wI}$表示输入向量，隐层输出为$\bf{h}$，意味着$\bf{h}$简单拷贝输入-隐层的权重矩阵($\bf{W}$)一行，对于输出层，预测公式则表示为：</p>
 <p>$$P(w_{c,j}=W_{O,c}|w_I)=y_{c,j}=\frac{\exp(u_{c,j})}{\sum_{j’=1}^{V}\exp(u_{c,j’})} \tag{19}$$</p>
-<p>8.计算效率</p>
-<p>9.Hierarchical Softmax</p>
-<p>10.Negative Sampling</p>
-<p>11.实现</p>
-
+<p>$w_I$是输入词，$w_{O,c}$是需要预测的第$c$个输出，而$u_{c,j}$ 是预测的第$c$个词为$j$的概率，公式计算为：</p>
+<p>$$u_{c,j}=u_j=v_{wj}^{T}\cdot h \ \ \ \mathrm{for} \ c = 1,2,…C \tag{20}$$</p>
+<p>其计算损失函数以及BP过程与CBOW类似，其中损失函数为：</p>
+<p>$$\begin{split}E &amp;= -\log P(w_{O,1},w_{O,2},…,w_{O,C}|w_I)\&amp;=-\log\prod \limits_{c=1}^{C}\frac{exp(u_{c,j_c^*})}{\sum\limits_{j’=1}{V}\exp(u_{j’})}\&amp;=-\sum\limits_{c=1}^{C}u_{j_c^*}+C\cdot \log \sum \limits_{j’=1}{V}\exp(u_{j’})\end{split}\tag{21}$$</p>
+<p>$j_c^*$是要预测的第$c$个词的下标，skip-gram与CBOW区别为E为多个词的损失函数。</p>
+<h2 id="5-实现"><a href="#5-实现" class="headerlink" title="5.实现"></a>5.实现</h2>
                 
             </div>
             <hr/>
