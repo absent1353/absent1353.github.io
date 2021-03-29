@@ -511,6 +511,20 @@
 <p>​                                                        $$h=W^Tx=W_{k,}^T=W_{wI}^T \tag{5}$$</p>
 <img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/%E5%9F%BA%E7%A1%80CBOW%E6%A8%A1%E5%9E%8B.jpg" class="" title="基础的CBOW模型(word2vec Parameter Learning Explainedhttps:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1411.2738)">
 
+<p>因此隐层的输出h其实就是输入词$w_I$对应的第$k$行这个向量，由于x的one-hot特性，我们计算h的时候并不需要真的进行矩阵向量乘法，在word2vec的隐层，我们一般不使用激活函数。只需要找到x对应的那一行就好了，举例如下：</p>
+<img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/%E9%9A%90%E5%B1%82%E8%BE%93%E5%87%BA.jpg" class="" title="one-hot对应的隐层输出(Row vector)">
+
+<p>隐层到输出层的参数矩阵是一个$N*V$的矩阵$W’$(这里$W’$只是表示和W不同第一个矩阵而已),使用它我们可以计算输出第$j$个词的得分$u_j$为：</p>
+<p>​                                                                      $$u_j = v_{wj}^{‘T}h\tag{6}$$</p>
+<p>$v_{wj}^{‘T}$表示的是$W’$的第$j$列，获取输出概率，对所有的$u_j$进行softmax：</p>
+<p>​                                                                             $$P(w_j|w_I) = y_j= \frac{\exp(u_j)}{\sum_{j^{‘}=1}^{V}\exp(u_{j^{‘}})} \tag{7}$$</p>
+<p>结合(5)和(6)，式(7)为：</p>
+<p>$$P(w_j|w_I) = y_j= \frac{\exp(v_{wj}^{‘T}v_{wI})}{\sum_{j^{‘}=1}^{V}\exp(v_{wj}^{‘T}v_{wI})}  \tag{8}$$</p>
+<p>$v_w$和$v_w^{‘}$是词$w$的两种向量表示，$v_w$来自矩阵$W$的某一行，叫做输入向量，而$v_w^{‘}$来自矩阵$W’$的某一列，叫做输出向量，如果输入词$w_I$和输出词$w_j$的词向量内积比较大，说明它们比较相似，$P(w_j|w_I)$就比较大。</p>
+<h3 id="4-2-CBOW的反向传播"><a href="#4-2-CBOW的反向传播" class="headerlink" title="4.2 CBOW的反向传播"></a>4.2 CBOW的反向传播</h3><p>首先计算隐层到输出层参数$W$的梯度,损失函数是交叉熵损失函数,给定输入$w_I$,输出是$w_O$ , 假设$w_O$对应的下标是$j^*$ ,损失函数$E$的计算公式为:</p>
+<p>​                                         $$E = -\log y_j^{*} = -u_j + \log\sum_{j^{‘}=1}^{V}\exp(u_{j^{‘}}) \tag{9}$$</p>
+<p>求$E$ 对 $u_j$ 偏导数为:</p>
+<p>​                                                                                       $$\frac{\partial E}{\partial u_j} =-t_j+\frac{\exp(u_j)}{\sum_{j^{‘}=1}^{V}\exp(u_{j^{‘}})}=y_j-t_j=e_j \tag{10}$$</p>
 <p>6.多个词上下文</p>
 <p>7.Skip-Gram模型</p>
 <p>8.计算效率</p>
