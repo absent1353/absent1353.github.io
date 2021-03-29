@@ -477,12 +477,24 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h2><p>1.</p>
-<p>2.</p>
-<p>3.</p>
-<p>4.</p>
-<p>5.</p>
-<p>6.</p>
+                <h1 id="Word-Embedding"><a href="#Word-Embedding" class="headerlink" title="Word Embedding"></a>Word Embedding</h1><h2 id="1-词的表示方法"><a href="#1-词的表示方法" class="headerlink" title="1.词的表示方法"></a>1.词的表示方法</h2><p>深度学习模型要在第一步把离散的符号变成向量，我们希望把一个词映射到“语义”空间中的一个点，使得相似的词的距离较近，不相似的较远，用向量来表示一个点，因此通常把这个向量叫做词向量，将文本数据处理成数值张量的过程叫做向量化(<strong>vectorize</strong>)。</p>
+<p>文本向量化策略有：</p>
+<p>1.将文本分割为单词，每个单词转换为一个向量<br>2.将文本分割为字符，每个字符转化为一个向量<br>3.提取单词或者字符的n-gram，将n-gram转换为一个向量</p>
+<p>将文本分解成的单元叫做<strong>标记（token）</strong>，将文本分解成标记的过程叫做<strong>分词（tokenization）</strong>。</p>
+<h2 id="2-one-hot向量"><a href="#2-one-hot向量" class="headerlink" title="2.one-hot向量"></a>2.one-hot向量</h2><p>最简单的方法就是one-hot表示，如果词典大小为4，可以用以下图示表示(实际通常要几万)，每个词对应一个下表，每个词都用长度为4向量表示，只有对应的下标为1，其余为零。</p>
+<img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/one-hot.jpg" class="" title="one-hot图示">
+
+
+
+<p>3.神经网络语言模型</p>
+<p>4.Word2Vec</p>
+<p>5.上下文(context)</p>
+<p>6.多个词上下文</p>
+<p>7.Skip-Gram模型</p>
+<p>8.计算效率</p>
+<p>9.Hierarchical Softmax</p>
+<p>10.Negative Sampling</p>
+<p>11.实现</p>
 
                 
             </div>
