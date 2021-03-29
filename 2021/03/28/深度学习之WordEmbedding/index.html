@@ -535,7 +535,20 @@
 <p>$$\frac{\partial E}{\partial w_{ki}} = \frac{\partial E}{\partial h_i} \cdot \frac{\partial h_i}{\partial w_{ki}} = EH_i \cdot x_k \tag{14}$$</p>
 <p>向量形式为$\frac{\partial E}{\partial W} = X \bigotimes EH^T$,是一个$V \times N$ 的矩阵, 但是$x$ 只有一个元素非零,因此$\frac{\partial E}{\partial W}$只有一个行非零,所以梯度下降对于W只需要更新输入$w_I$ 对应的那一个(行)向量</p>
 <p>​                                                             $$v_{w_I}^{new} \leftarrow v_{w_I}^{old} - \eta EH^T  \tag{15}$$</p>
-<h3 id="4-3-Multi-word-CBOW模型"><a href="#4-3-Multi-word-CBOW模型" class="headerlink" title="4.3.Multi-word CBOW模型"></a>4.3.Multi-word CBOW模型</h3><p>7.Skip-Gram模型</p>
+<h3 id="4-3-Multi-word-CBOW模型"><a href="#4-3-Multi-word-CBOW模型" class="headerlink" title="4.3.Multi-word CBOW模型"></a>4.3.Multi-word CBOW模型</h3><img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/Multi-word.jpg" class="" title="多个单词输入的CBOW模型">
+
+<p>用one-hot表示每个词，把多个向量输入到CBOW模型，采用平均方法：</p>
+<p>$$\begin{split}h&amp;=\frac{1}{C}W^T(x_1+x_2+…+x_C) \ &amp;= \frac{1}{C}(v_{w_1}+…+v_{wC})^T\end{split} \tag{16}$$</p>
+<p>一旦计算出$h$，后面的计算与普通的CBOW一致，计算损失为：</p>
+<p>$$\begin{split}E = -\log y_{j}^* &amp;= -u_j^*+\log(\sum \limits_{j^{‘}=1}^{V}\exp(u_{j’}))\&amp;=-v_{w_O}^{‘T}\cdot h+\log(\sum\limits_{j’=1}^{V}\exp(v_{wj}^{‘T}\cdot h)) \end{split} \tag{17}$$</p>
+<p>梯度更新为：</p>
+<p> $$v_{w_I,c}^{new} \leftarrow v_{w_I,c}^{old} -\frac{1}{C} \eta EH^T  \tag{18}$$</p>
+<p>7.Skip-Gram模型</p>
+<p>skip-Gram是用一个词来预测上下文：</p>
+<img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/skip-gram.jpg" class="" title="skip-gram模型图示">
+
+<p>与CBOW模型一致，依然采用$v_{wI}$表示输入向量，隐层输出为$\bf{h}$，意味着$\bf{h}$简单拷贝输入-隐层的权重矩阵($\bf{W}$)一行，对于输出层，预测公式则表示为：</p>
+<p>$$P(w_{c,j}=W_{O,c}|w_I)=y_{c,j}=\frac{\exp(u_{c,j})}{\sum_{j’=1}^{V}\exp(u_{c,j’})} \tag{19}$$</p>
 <p>8.计算效率</p>
 <p>9.Hierarchical Softmax</p>
 <p>10.Negative Sampling</p>
@@ -785,9 +798,9 @@
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="写博客的初衷">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">写博客的初衷</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -802,11 +815,23 @@
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            奋斗
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
+                                    随笔
+                                </a>
+                            
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
+                        <span class="chip bg-color">个人随笔</span>
+                    </a>
+                    
                 </div>
                 
             </div>
