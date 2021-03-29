@@ -538,9 +538,9 @@
 <h3 id="4-3-Multi-word-CBOW模型"><a href="#4-3-Multi-word-CBOW模型" class="headerlink" title="4.3.Multi-word CBOW模型"></a>4.3.Multi-word CBOW模型</h3><img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/Multi-word.jpg" class="" title="多个单词输入的CBOW模型">
 
 <p>用one-hot表示每个词，把多个向量输入到CBOW模型，采用平均方法：</p>
-<p>$$\begin{split}h&amp;=\frac{1}{C}W^T(x_1+x_2+…+x_C) \ &amp;= \frac{1}{C}(v_{w_1}+…+v_{wC})^T\end{split} \tag{16}$$</p>
+<p>$$\begin{split}h&amp;=\frac{1}{C}W^T(x_1+x_2+…+x_C) \\ &amp;= \frac{1}{C}(v_{w_1}+…+v_{wC})^T\end{split} \tag{16}$$</p>
 <p>一旦计算出$h$，后面的计算与普通的CBOW一致，计算损失为：</p>
-<p>$$\begin{split}E = -\log y_{j}^* &amp;= -u_j^*+\log(\sum \limits_{j^{‘}=1}^{V}\exp(u_{j’}))\&amp;=-v_{w_O}^{‘T}\cdot h+\log(\sum\limits_{j’=1}^{V}\exp(v_{wj}^{‘T}\cdot h)) \end{split} \tag{17}$$</p>
+<p>$$\begin{split}E = -\log y_{j}^* &amp;= -u_j^*+\log(\sum \limits_{j^{‘}=1}^{V}\exp(u_{j’}))\\&amp;=-v_{w_O}^{‘T}\cdot h+\log(\sum\limits_{j’=1}^{V}\exp(v_{wj}^{‘T}\cdot h)) \end{split} \tag{17}$$</p>
 <p>梯度更新为：</p>
 <p> $$v_{w_I,c}^{new} \leftarrow v_{w_I,c}^{old} -\frac{1}{C} \eta EH^T  \tag{18}$$</p>
 <p>7.Skip-Gram模型</p>
@@ -552,7 +552,7 @@
 <p>$w_I$是输入词，$w_{O,c}$是需要预测的第$c$个输出，而$u_{c,j}$ 是预测的第$c$个词为$j$的概率，公式计算为：</p>
 <p>$$u_{c,j}=u_j=v_{wj}^{T}\cdot h \ \ \ \mathrm{for} \ c = 1,2,…C \tag{20}$$</p>
 <p>其计算损失函数以及BP过程与CBOW类似，其中损失函数为：</p>
-<p>$$\begin{split}E &amp;= -\log P(w_{O,1},w_{O,2},…,w_{O,C}|w_I)\&amp;=-\log\prod \limits_{c=1}^{C}\frac{exp(u_{c,j_c^*})}{\sum\limits_{j’=1}{V}\exp(u_{j’})}\&amp;=-\sum\limits_{c=1}^{C}u_{j_c^*}+C\cdot \log \sum \limits_{j’=1}{V}\exp(u_{j’})\end{split}\tag{21}$$</p>
+<p>$$\begin{split}E &amp;= -\log P(w_{O,1},w_{O,2},…,w_{O,C}|w_I)\\&amp;=-\log\prod \limits_{c=1}^{C}\frac{exp(u_{c,j_c^*})}{\sum\limits_{j’=1}{V}\exp(u_{j’})}\\&amp;=-\sum\limits_{c=1}^{C}u_{j_c^*}+C\cdot \log \sum \limits_{j’=1}{V}\exp(u_{j’})\end{split}\tag{21}$$</p>
 <p>$j_c^*$是要预测的第$c$个词的下标，skip-gram与CBOW区别为E为多个词的损失函数。</p>
 <h2 id="5-实现"><a href="#5-实现" class="headerlink" title="5.实现"></a>5.实现</h2>
                 
