@@ -478,6 +478,52 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Java数组类型"><a href="#Java数组类型" class="headerlink" title="Java数组类型"></a>Java数组类型</h1><h2 id="1-数组也是一种类型"><a href="#1-数组也是一种类型" class="headerlink" title="1.数组也是一种类型"></a>1.数组也是一种类型</h2><p>Java要求所有数组元素具有相同的数据类型，一旦数据初始化完成，数组在内存中所占的空间将被固定下来，数组长度将不可变，即使把某个数组元素的数据清空，空间依然被保留，依然属于该数组，数组长度不变。</p>
+<h2 id="2-定义数组"><a href="#2-定义数组" class="headerlink" title="2.定义数组"></a>2.定义数组</h2><pre class=" language-java"><code class="language-java">type<span class="token punctuation">[</span><span class="token punctuation">]</span> arrayName<span class="token punctuation">;</span>    
+</code></pre>
+<ul>
+<li><p>数组是一种引用类型的变量，使用它定义一个变量时，仅仅表示定义了一个引用变量(也就是定义了一个指针)，这个引用变量还未指向任何有效的内存，因此定义数组时不能指定数组的长度。</p>
+</li>
+<li><p>定义数组只是定义了一个引用变量，并未指向任何有效的内存空间，所以还没有内存空间来存储数组元素，因此这个数组也不能使用，只有对数组进行初始化后才可以使用。</p>
+</li>
+</ul>
+<p><strong>key</strong>：定义数组时不能指定数组的长度。</p>
+<h2 id="3-数组的初始化"><a href="#3-数组的初始化" class="headerlink" title="3. 数组的初始化"></a>3. 数组的初始化</h2><p>先初始化后使用，初始化：为数组的数组元素分配内存空间，并且为每个数组元素赋初始值。初始值获取两种形式：系统自动分配或由程序员指定。</p>
+<p>初始化方式包含：</p>
+<ol>
+<li><p>静态初始化，显式指定每个数组元素的初始值，系统决定数组长度</p>
+</li>
+<li><p>动态初始化，初始化时程序员只指定数组的<strong>长度</strong>，系统为数组元素分配初值</p>
+</li>
+</ol>
+<h3 id="3-1-静态初始化"><a href="#3-1-静态初始化" class="headerlink" title="3.1 静态初始化"></a>3.1 静态初始化</h3><p>格式：</p>
+<pre class=" language-java"><code class="language-java">arrayName <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">type</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span>elem1<span class="token punctuation">,</span>elem2<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span>elem10<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span>        
+</code></pre>
+<p>三种静态初始化例子如下：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//定义int数组类型的变量</span>
+<span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> intArr<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//静态初始化</span>
+intArr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">//定义Object数组类型的变量，变量名为objArr</span>
+Object<span class="token punctuation">[</span><span class="token punctuation">]</span> objArr<span class="token punctuation">;</span>
+objArr <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token string">"Java"</span><span class="token punctuation">,</span><span class="token string">"李刚"</span><span class="token punctuation">,</span><span class="token string">"一个礼拜"</span><span class="token punctuation">,</span><span class="token string">"学习基础"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+Object<span class="token punctuation">[</span><span class="token punctuation">]</span> objArr2<span class="token punctuation">;</span>
+objArr2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Object</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span><span class="token string">"Java"</span><span class="token punctuation">,</span><span class="token string">"Test"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>简化版本的语法格式(静态初始化)：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> a <span class="token operator">=</span> <span class="token punctuation">{</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">8</span><span class="token punctuation">,</span><span class="token number">9</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+type<span class="token punctuation">[</span><span class="token punctuation">]</span> arrayName <span class="token operator">=</span> <span class="token punctuation">{</span>elem1<span class="token punctuation">,</span>elem2<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">,</span>elem10<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span>
+</code></pre>
+<h3 id="3-2-动态初始化"><a href="#3-2-动态初始化" class="headerlink" title="3.2 动态初始化"></a>3.2 动态初始化</h3><p>只指定数组长度，由系统为每个数组元素指定初始值</p>
+<pre class=" language-java"><code class="language-java">arrayName <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">type</span><span class="token punctuation">[</span>length<span class="token punctuation">]</span><span class="token punctuation">;</span>    
+</code></pre>
+<p>执行动态初始化时，程序员只需指定数组的长度，为每个数组元素指定所需的内存空间，系统将负责为这些数组元素分配初始值，分配规则为：</p>
+<ul>
+<li>整数类型：byte/short/int和long，元素值为0</li>
+<li>浮点型: float和double，元素值为0.0</li>
+<li>字符类型：char，元素值为<code>\u0000</code></li>
+<li>布尔类型：boolean，元素值为false</li>
+</ul>
+<h2 id="4-使用数组"><a href="#4-使用数组" class="headerlink" title="4.使用数组"></a>4.使用数组</h2><p>使用下标访问数组元素，警惕异常<code>java.lang.ArrayIndexOutOfBoundsException:N(数组索引越界异常)</code></p>
 
                 
             </div>
