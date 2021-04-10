@@ -478,32 +478,289 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="C-字符串、向量和数组"><a href="#C-字符串、向量和数组" class="headerlink" title="C++字符串、向量和数组"></a>C++字符串、向量和数组</h1><h2 id="1-命名空间using声明"><a href="#1-命名空间using声明" class="headerlink" title="1. 命名空间using声明"></a>1. 命名空间using声明</h2><p>每个名字都需要独立的using声明，例如：</p>
-<pre class=" language-c++"><code class="language-c++">#include <iostream>
-using std::cin;
-using std::cout;
-using std::endl;
-int main() {
-    cout << "Enter two numbers:" << endl;
-    int v1, v2;
-    cin >> v1 >> v2;
-    cout << "The sum of " << v1 << " and " << v2 << " is " << v1 + v2 << endl;
-    return 0;
-}
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#include &lt;iostream></span>
+using std::cin<span class="token punctuation">;</span>
+using std::cout<span class="token punctuation">;</span>
+using std::endl<span class="token punctuation">;</span>
+int main<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Enter two numbers:"</span> <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    int v1, v2<span class="token punctuation">;</span>
+    cin <span class="token operator">>></span> v1 <span class="token operator">>></span> v2<span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> <span class="token string">"The sum of "</span> <span class="token operator">&lt;&lt;</span> v1 <span class="token operator">&lt;&lt;</span> <span class="token string">" and "</span> <span class="token operator">&lt;&lt;</span> v2 <span class="token operator">&lt;&lt;</span> <span class="token string">" is "</span> <span class="token operator">&lt;&lt;</span> v1 + v2 <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
 </code></pre>
 <p>头文件不应包含using声明</p>
 <h2 id="2-标准库类型string"><a href="#2-标准库类型string" class="headerlink" title="2. 标准库类型string"></a>2. 标准库类型string</h2><p>标准库类型<strong>string</strong>表示可变长的字符序列，使用string类型必须首先包含<strong>string</strong>头文件，作为标准库的一部分，string定义在命名空间std中。</p>
-<pre class=" language-c++"><code class="language-c++">#including<string>
-using std::string;
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#including&lt;string></span>
+using std::string<span class="token punctuation">;</span>
 </code></pre>
 <h3 id="2-1-定义和初始化string对象"><a href="#2-1-定义和初始化string对象" class="headerlink" title="2.1 定义和初始化string对象"></a>2.1 定义和初始化string对象</h3><p>初始化类的对象由类本身决定，string对象最常用的一些方式</p>
-<pre class=" language-c++"><code class="language-c++">string s1;               //默认初始化，S1是个空字符串
-string s2(s1);           //s2是s1的副本
-string s2 = s1;          //s2是s1的副本
-string s3("value");      //s3是字面值value的副本
-string s3 = "hiya";      //s3是该字符串字面值的副本
-string s4(10,'c');       //s4的内容是cccccccccc
+<pre class=" language-bash"><code class="language-bash">string s1<span class="token punctuation">;</span>               //默认初始化，S1是个空字符串
+string s2<span class="token punctuation">(</span>s1<span class="token punctuation">)</span><span class="token punctuation">;</span>           //s2是s1的副本
+string s2 <span class="token operator">=</span> s1<span class="token punctuation">;</span>          //s2是s1的副本
+string s3<span class="token punctuation">(</span><span class="token string">"value"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>      //s3是字面值value的副本
+string s3 <span class="token operator">=</span> <span class="token string">"hiya"</span><span class="token punctuation">;</span>      //s3是该字符串字面值的副本
+string s4<span class="token punctuation">(</span>10,<span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>       //s4的内容是cccccccccc
 </code></pre>
-<h3 id="2-2-直接初始化和拷贝初始化"><a href="#2-2-直接初始化和拷贝初始化" class="headerlink" title="2.2 直接初始化和拷贝初始化"></a>2.2 直接初始化和拷贝初始化</h3><h2 id="3-标注库类型vector"><a href="#3-标注库类型vector" class="headerlink" title="3. 标注库类型vector"></a>3. 标注库类型vector</h2><h2 id="4-迭代器"><a href="#4-迭代器" class="headerlink" title="4.迭代器"></a>4.迭代器</h2><h2 id="5-数组"><a href="#5-数组" class="headerlink" title="5. 数组"></a>5. 数组</h2><h2 id="6-多维数组"><a href="#6-多维数组" class="headerlink" title="6.多维数组"></a>6.多维数组</h2>
+<h4 id="直接初始化和拷贝初始化"><a href="#直接初始化和拷贝初始化" class="headerlink" title="直接初始化和拷贝初始化"></a>直接初始化和拷贝初始化</h4><p>如果使用等号(=)初始化一个变量，实际上执行的是**拷贝初始化(copy)**，编译器把等号右侧的初始值拷贝到新创建的对象中去，与之相反，如果不用等好，执行的是直接初始化(direct initialization)。</p>
+<p>初始值只有一个时，使用直接初始化或拷贝初始化都行，如果像上面s4那样初始化要用到的值有多个，一般来说只能使用直接初始化的方式：</p>
+<pre class=" language-bash"><code class="language-bash">string s5 <span class="token operator">=</span> <span class="token string">"hiya"</span><span class="token punctuation">;</span>  //拷贝初始化
+string s6<span class="token punctuation">(</span><span class="token string">"hiya"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>   //直接初始化
+string s7<span class="token punctuation">(</span>10,<span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  //直接初始化，s7的内容是cccccccccc
+</code></pre>
+<p> 对于用多个值进行初始化的情况，非要用拷贝初始化的方式来也可以，需要显式地创建一个(临时)对象用于拷贝</p>
+<pre class=" language-bash"><code class="language-bash">string s8 <span class="token operator">=</span> string<span class="token punctuation">(</span>10,<span class="token string">'c'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> //拷贝初始化
+</code></pre>
+<p>上述等同于数字10和字符c两个参数创建出来一个string对象，这个string对象又拷贝给了s8.</p>
+<h3 id="2-2-string对象操作"><a href="#2-2-string对象操作" class="headerlink" title="2.2 string对象操作"></a>2.2 string对象操作</h3><table>
+<thead>
+<tr>
+<th>os&lt;&lt;s</th>
+<th>将s写到输出流os中，返回os</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>is&gt;&gt;s</td>
+<td>从is中读取字符串赋给s，字符串以空白分割，返回is</td>
+</tr>
+<tr>
+<td>getline(is,s)</td>
+<td>从is中读取一行赋给s，返回is</td>
+</tr>
+<tr>
+<td>s.empty()</td>
+<td>s为空返回true，否则返回false</td>
+</tr>
+<tr>
+<td>s.size()</td>
+<td>返回s中字符地个数</td>
+</tr>
+<tr>
+<td>s[n]</td>
+<td>返回s中第n个字符的引用,位置从0计起</td>
+</tr>
+<tr>
+<td>s1+s2</td>
+<td>返回s1和s2连接后的结果</td>
+</tr>
+<tr>
+<td>s1=s2</td>
+<td>用s2的副本代替s1中原来的字符</td>
+</tr>
+<tr>
+<td>s1==s2</td>
+<td>如果s1和s2中所含的字符完全一样，他们相等，大小写敏感</td>
+</tr>
+<tr>
+<td>s1！=s2</td>
+<td>判断不相等</td>
+</tr>
+<tr>
+<td>&lt;，&lt;=,&gt;,&gt;=</td>
+<td>利用字符在字典中顺序进行比较，大小写敏感</td>
+</tr>
+</tbody></table>
+<h4 id="2-2-1-读写string对象"><a href="#2-2-1-读写string对象" class="headerlink" title="2.2.1 读写string对象"></a>2.2.1 读写string对象</h4><p>使用IO操作符读写string对象：</p>
+<pre class=" language-bash"><code class="language-bash">int main<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    string s<span class="token punctuation">;</span>
+    cin<span class="token operator">>></span>s<span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span>s<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>读取规则：string对象会自动忽略开头的空白(即空格符，换行符，制表符等)，并从第一个真正的字符开始读起，直到遇见下一处空白为止。string对象返回运算符左侧的运算对象作为其结果，因此可以将多个输入连写在一起。</p>
+<h4 id="2-2-2-读取未知数量的string对象"><a href="#2-2-2-读取未知数量的string对象" class="headerlink" title="2.2.2 读取未知数量的string对象"></a>2.2.2 读取未知数量的string对象</h4><p>配合使用while语句内部操作完成，循环体遇到文件结束标记或者非法输入而结束</p>
+<pre class=" language-bash"><code class="language-bash">while<span class="token punctuation">(</span>cin<span class="token operator">>></span>word<span class="token punctuation">)</span>
+    cout<span class="token operator">&lt;&lt;</span>word<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+</code></pre>
+<h4 id="2-2-3-使用getline读取一整行"><a href="#2-2-3-使用getline读取一整行" class="headerlink" title="2.2.3 使用getline读取一整行"></a>2.2.3 使用getline读取一整行</h4><p>如希望在最终得到的字符串保留输入时的空白符号，应该使用<code>getline</code>而不是<code>&gt;&gt;</code>运算符。getline函数的参数是一个输入流和一个string对象，函数从给定的输入流中读入内容，直到遇到换行符为止(换行符被读进来了)，然后把所读的内容存入到那个string对象中(不存换行符)。<strong>getline遇到换行符就结束读取操作并返回结果</strong>，如果开始就是换行符，就是个空string结果。</p>
+<p>和输入运算符一样，getline也会返回它的流参数，因此既然输入运算符能作为判断的条件，我们也能用getline的结果作为条件，对上面代码稍加修改，就可以读取一行操作</p>
+<pre class=" language-bash"><code class="language-bash">while<span class="token punctuation">(</span>getline<span class="token punctuation">(</span>cin,line<span class="token punctuation">))</span>
+    cout<span class="token operator">&lt;&lt;</span>line<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+</code></pre>
+<h4 id="2-2-4-empty与size操作"><a href="#2-2-4-empty与size操作" class="headerlink" title="2.2.4 empty与size操作"></a>2.2.4 empty与size操作</h4><p>empty是string一个成员函数，使用如下</p>
+<pre class=" language-bash"><code class="language-bash">if<span class="token punctuation">(</span><span class="token operator">!</span>line.empty<span class="token punctuation">(</span><span class="token punctuation">))</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"SY a big company"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+</code></pre>
+<p>size函数返回的是string对象长度，如line.size()。</p>
+<h4 id="2-2-5-string-size-type类型"><a href="#2-2-5-string-size-type类型" class="headerlink" title="2.2.5 string::size_type类型"></a>2.2.5 string::size_type类型</h4><p><code>string::size_type</code>是个无符号类型的值，并且足够存放下任何string对象的大小，所有用于存放string类的size函数返回值的变量，都应该是string::size_type类型的。</p>
+<h4 id="2-2-6-比较string对象"><a href="#2-2-6-比较string对象" class="headerlink" title="2.2.6 比较string对象"></a>2.2.6 比较string对象</h4><p>规则是按照字典顺序，并且大小写敏感</p>
+<ol>
+<li>如果两个stirng对象长度不同，较短的string对象每个字符都与长的string对象对应位置的字符相同，短的&lt;长的。</li>
+<li>如果两个string对象在某些对应位置不一致，string对象比较的结果其实是string对象中第一对相异字符比较的结果。</li>
+</ol>
+<h4 id="2-2-7-为string对象赋值"><a href="#2-2-7-为string对象赋值" class="headerlink" title="2.2.7 为string对象赋值"></a>2.2.7 为string对象赋值</h4><p>允许将一个对象的值赋值给另一个对象</p>
+<pre class=" language-bash"><code class="language-bash">string st1<span class="token punctuation">(</span>10,<span class="token string">'c'</span><span class="token punctuation">)</span>,st2<span class="token punctuation">;</span>
+st1 <span class="token operator">=</span> st2<span class="token punctuation">;</span> //用一个空字符串st2的副本替换st1的内容
+</code></pre>
+<h4 id="2-2-8-两个string对象相加"><a href="#2-2-8-两个string对象相加" class="headerlink" title="2.2.8 两个string对象相加"></a>2.2.8 两个string对象相加</h4><p>两个string对象相加得到一个新的string对象，其内容是把左侧的运算对象与右侧运算对象串接而成。</p>
+<pre class=" language-bash"><code class="language-bash">string s1 <span class="token operator">=</span><span class="token string">"hello, "</span>,s2 <span class="token operator">=</span> <span class="token string">"World\n"</span><span class="token punctuation">;</span>
+string s3 <span class="token operator">=</span> s1+ s2<span class="token punctuation">;</span> \\s3内容是hello, World\n
+</code></pre>
+<h4 id="2-2-9-字面值和string对象相加"><a href="#2-2-9-字面值和string对象相加" class="headerlink" title="2.2.9 字面值和string对象相加"></a>2.2.9 字面值和string对象相加</h4><p>标准库允许将字符字面值和字符串字面值转换为string对象，需要string对象的地方就可以使用两种字面值来替代。但是必须要保证每个加法运算符的两侧运算对象<strong>至少有一个是string</strong></p>
+<pre class=" language-bash"><code class="language-bash">string s4<span class="token operator">=</span> s1+<span class="token string">", "</span><span class="token punctuation">;</span> //把一个string对象和一个字面值相加
+string s5 <span class="token operator">=</span> <span class="token string">"hello"</span> + <span class="token string">", "</span><span class="token punctuation">;</span> //错误，两个运算对象都非string
+string s6 <span class="token operator">=</span> s1 + <span class="token string">", "</span> + <span class="token string">"world"</span><span class="token punctuation">;</span> //正确，s1+，后是string
+string s7 <span class="token operator">=</span> <span class="token string">"hello "</span>+<span class="token string">", "</span>+s2<span class="token punctuation">;</span> //错误，不能把字面值直接相加
+</code></pre>
+<h3 id="2-3-处理string对象中的字符"><a href="#2-3-处理string对象中的字符" class="headerlink" title="2.3 处理string对象中的字符"></a>2.3 处理string对象中的字符</h3><p>处理此类问题包含：获取字符本身和改变字符的特性，在<strong>cctype</strong>头文件中定义了一组标准库函数处理这部分工作。</p>
+<table>
+<thead>
+<tr>
+<th>isalnum(c)</th>
+<th>c是字母或数字时为真</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>isalpha(c)</td>
+<td>c是字母时真</td>
+</tr>
+<tr>
+<td>iscntrl(c)</td>
+<td>c是控制字符时为真</td>
+</tr>
+<tr>
+<td>isdigit(c)</td>
+<td>c是数字是为真</td>
+</tr>
+<tr>
+<td>isgraph(c)</td>
+<td>c不是空格但可打印时真</td>
+</tr>
+<tr>
+<td>islower(c)</td>
+<td>c小写字母时真</td>
+</tr>
+<tr>
+<td>isprint(c)</td>
+<td>c是可打印字符时真</td>
+</tr>
+<tr>
+<td>ispunct(c)</td>
+<td>c是标点符号时真</td>
+</tr>
+<tr>
+<td>isspace(c)</td>
+<td>c是空白为真</td>
+</tr>
+<tr>
+<td>isupper(c)</td>
+<td>c是大写字母为真</td>
+</tr>
+<tr>
+<td>isxdigit(c)</td>
+<td>c是十六进制为真</td>
+</tr>
+<tr>
+<td>tolower(c)</td>
+<td>c是大写字母输出对应小写，否则原样输出c</td>
+</tr>
+<tr>
+<td>toupper(c)</td>
+<td>c是小写字母，输出对应大写字母，否则原样输出c</td>
+</tr>
+</tbody></table>
+<h4 id="2-3-1-使用for语句处理每个字符"><a href="#2-3-1-使用for语句处理每个字符" class="headerlink" title="2.3.1 使用for语句处理每个字符"></a>2.3.1 使用for语句处理每个字符</h4><pre class=" language-bash"><code class="language-bash">for<span class="token punctuation">(</span>declaration: expression<span class="token punctuation">)</span>
+    statement
+</code></pre>
+<p>如：</p>
+<pre class=" language-bash"><code class="language-bash">string str<span class="token punctuation">(</span><span class="token string">"some string"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+for<span class="token punctuation">(</span>auto c: str<span class="token punctuation">)</span>
+    cout<span class="token operator">&lt;&lt;</span>c<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span> 
+</code></pre>
+<p>对于str中的每个字符，输出当前字符，后面紧跟一个换行符。</p>
+<h4 id="2-3-2-使用范围for语句改变字符串中的字符"><a href="#2-3-2-使用范围for语句改变字符串中的字符" class="headerlink" title="2.3.2 使用范围for语句改变字符串中的字符"></a>2.3.2 <font color=red>使用范围for语句改变字符串中的字符</font></h4><p>如果要改变string对象中字符的值，必须把循环变量定义成<strong>引用类型</strong>。所谓引用只是给定对象的一个别名，因此当使用引用作为循环控制变量时，这个变量实际上被依次绑定到了序列的每个元素上，使用这个引用，我们就能改变它绑定的字符。</p>
+<pre class=" language-bash"><code class="language-bash">string s_l<span class="token punctuation">(</span><span class="token string">"hello world,I want to lean more about C plus plus"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+for<span class="token punctuation">(</span>auto c:s_l<span class="token punctuation">)</span>
+    c <span class="token operator">=</span> toupper<span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout<span class="token operator">&lt;&lt;</span><span class="token string">"without &amp; s is: "</span><span class="token operator">&lt;&lt;</span>s_l<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+for<span class="token punctuation">(</span>auto <span class="token operator">&amp;</span>c:s_l<span class="token punctuation">)</span>
+    c <span class="token operator">=</span> toupper<span class="token punctuation">(</span>c<span class="token punctuation">)</span><span class="token punctuation">;</span>
+cout<span class="token operator">&lt;&lt;</span><span class="token string">"With &amp; s is "</span><span class="token operator">&lt;&lt;</span>s_l<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+<span class="token operator">>></span><span class="token operator">></span>
+without <span class="token operator">&amp;</span> s is: hello world,I want to lean <span class="token function">more</span> about C plus plus
+With <span class="token operator">&amp;</span> s is HELLO WORLD,I WANT TO LEAN MORE ABOUT C PLUS PLUS
+</code></pre>
+<p>访问string对象中的单个字符：</p>
+<p>下标运算符([])，接收的输入参数是string::size_type类型的值，表示要访问的字符的位置，返回值是该位置上字符的引用。</p>
+<p>另一个是迭代器方法。</p>
+<pre class=" language-bash"><code class="language-bash">string s<span class="token punctuation">(</span><span class="token string">"HELLO WORLD"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+for<span class="token punctuation">(</span>decltype<span class="token punctuation">(</span>s.size<span class="token punctuation">(</span><span class="token punctuation">))</span> index<span class="token operator">=</span>0<span class="token punctuation">;</span>index<span class="token operator">!=</span>s.size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">&amp;&amp;</span><span class="token operator">!</span>isspace<span class="token punctuation">(</span>s<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>++index<span class="token punctuation">)</span>
+    s<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token operator">=</span>tolower<span class="token punctuation">(</span>s<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">>></span><span class="token operator">></span>
+hello WORLD<span class="token operator">!</span><span class="token operator">!</span><span class="token operator">!</span> //遇到空格后面的就没有执行
+</code></pre>
+<h2 id="3-标注库类型vector"><a href="#3-标注库类型vector" class="headerlink" title="3. 标注库类型vector"></a>3. 标注库类型vector</h2><p>vector表示对象的集合，又被称为容器(container)，使用vector需要包含对应头文件</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#include&lt;vector></span>
+using std::vector<span class="token punctuation">;</span>
+</code></pre>
+<p>vector是一个类模板，本身不是类或函数，编译器根据模板创建类或函数的过程称为实例化(instantiation)，使用模板时，需要指出编译器应把类或函数实例化为何种类型。vector提供的额外信息是vector内所存方的对象的类型</p>
+<pre class=" language-bash"><code class="language-bash">vector<span class="token operator">&lt;</span>int<span class="token operator">></span> ivec<span class="token punctuation">;</span>             //ivec保存int类型对象
+vector<span class="token operator">&lt;</span>Sales_item<span class="token operator">></span> Sales_vec<span class="token punctuation">;</span>
+</code></pre>
+<p>由于引用不是对象，所以vector不包含引用。</p>
+<h3 id="3-1-定义-初始化vector对象"><a href="#3-1-定义-初始化vector对象" class="headerlink" title="3.1 定义/初始化vector对象"></a>3.1 定义/初始化vector对象</h3><table>
+<thead>
+<tr>
+<th>vector<T> v1</th>
+<th>v1是一个空vector，潜在的元素是T类型的，执行默认初始化</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>vector<T> v2(v1)</td>
+<td>v2中包含有v1所有元素的副本</td>
+</tr>
+<tr>
+<td>vector<T> v2=v1</td>
+<td>等价于v2(v1)</td>
+</tr>
+<tr>
+<td>vector<T> v3(n, val)</td>
+<td>v3包含有n个重复元素，每个元素值是val</td>
+</tr>
+<tr>
+<td>vector<T> v4(n)</td>
+<td>v4包含有n个重复执行了值初始化的对象</td>
+</tr>
+<tr>
+<td>vector<T> v5(a,b,c…)</td>
+<td>v5包含了初始值个数的元素，每个元素赋值为相应的初始值</td>
+</tr>
+<tr>
+<td>vector<T> v5=(a,b,c…)</td>
+<td>等价于v5(a,b,c…)</td>
+</tr>
+</tbody></table>
+<p>最常见的方式是定义一个空vector，运行时获取元素逐一添加。</p>
+<pre class=" language-bash"><code class="language-bash">vector<span class="token operator">&lt;</span>int<span class="token operator">></span> ivec<span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span>int<span class="token operator">></span> ivec2<span class="token punctuation">(</span>ivec<span class="token punctuation">)</span><span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span>int<span class="token operator">></span> ivec3<span class="token operator">=</span>ivec<span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span>string<span class="token operator">></span> svec<span class="token punctuation">(</span>ivec2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h4 id="3-1-1-列表初始化"><a href="#3-1-1-列表初始化" class="headerlink" title="3.1.1. 列表初始化"></a>3.1.1. 列表初始化</h4><pre class=" language-bash"><code class="language-bash">vector<span class="token operator">&lt;</span>string<span class="token operator">></span> artivles<span class="token operator">=</span><span class="token punctuation">{</span><span class="token string">"a"</span>,<span class="token string">"an"</span>,<span class="token string">"the"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>使用拷贝初始化时(使用=时)，只能提供一个初始值；如果提供的是一个类内初始值，只能使用拷贝初始化或花括号初始化；如果提供的是初始元素值的列表，只能把初始值都放在花括号里进行列表初始化，而不能放在圆括号中</p>
+<pre class=" language-bash"><code class="language-bash">vector<span class="token operator">&lt;</span>string<span class="token operator">></span> artivles<span class="token punctuation">{</span><span class="token string">"a"</span>,<span class="token string">"an"</span>,<span class="token string">"the"</span><span class="token punctuation">}</span><span class="token punctuation">;</span> //列表初始化
+vector<span class="token operator">&lt;</span>string<span class="token operator">></span> artivles1<span class="token punctuation">(</span><span class="token string">"a"</span>,<span class="token string">"an"</span>,<span class="token string">"the"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> //错误
+</code></pre>
+<h4 id="3-1-2-创建指定数量的元素"><a href="#3-1-2-创建指定数量的元素" class="headerlink" title="3.1.2 创建指定数量的元素"></a>3.1.2 创建指定数量的元素</h4><pre class=" language-bash"><code class="language-bash">vector<span class="token operator">&lt;</span>int<span class="token operator">></span> ivec<span class="token punctuation">(</span>10,-1<span class="token punctuation">)</span><span class="token punctuation">;</span>//10个int类型的元素，每个初始化为-1
+</code></pre>
+<h4 id="3-1-3-值初始化"><a href="#3-1-3-值初始化" class="headerlink" title="3.1.3 值初始化"></a>3.1.3 值初始化</h4><p>可以只提供vector对象容纳的元素数量而不用略去初始值，此时库会创建一个值初始化的元素初值，把它赋值给容器中所有元素。</p>
+<pre class=" language-bash"><code class="language-bash">vector<span class="token operator">&lt;</span>int<span class="token operator">></span> ivec<span class="token punctuation">(</span>10<span class="token punctuation">)</span><span class="token punctuation">;</span> //10个元素，每个都初始化为0
+</code></pre>
+<p>通过使用圆括号或花括号来区分是vector对象的容量还是元素的值。</p>
+<pre class=" language-bash"><code class="language-bash">vector<span class="token operator">&lt;</span>int<span class="token operator">></span> v3<span class="token punctuation">(</span>10,1<span class="token punctuation">)</span><span class="token punctuation">;</span> //v3有10个元素，每个值都是1
+vector<span class="token operator">&lt;</span>int<span class="token operator">></span> v4<span class="token punctuation">{</span>10,1<span class="token punctuation">}</span><span class="token punctuation">;</span> //v4两个元素，一个是10，一个是1
+</code></pre>
+<p>圆括号：提供的值用来构造vector对象</p>
+<p>花括号：列表初始化该vector对象</p>
+<p><strong>特例</strong>：如果初始化时使用了花括号的形式但是提供的值又不能用来列表初始化，就要考虑用这样的值来构造vector对象了。</p>
+<pre class=" language-bash"><code class="language-bash">vector<span class="token operator">&lt;</span>string<span class="token operator">></span> v7<span class="token punctuation">{</span>10<span class="token punctuation">}</span><span class="token punctuation">;</span>
+vector<span class="token operator">&lt;</span>string<span class="token operator">></span> v8<span class="token punctuation">{</span>10,<span class="token string">"hi"</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre>
+<p>要想列表初始化vector对象，<strong>花括号里的值必须与元素类型相同</strong>。显然不能用int初始化string对象，所以v7和v8提供的值不能作为元素的初始值。确认无法执行列表初始化后，编译器会尝试用默认值初始化vector。</p>
+<h3 id="3-2-向vector中添加元素"><a href="#3-2-向vector中添加元素" class="headerlink" title="3.2 向vector中添加元素"></a>3.2 向vector中添加元素</h3><h2 id="4-迭代器"><a href="#4-迭代器" class="headerlink" title="4.迭代器"></a>4.迭代器</h2><h2 id="5-数组"><a href="#5-数组" class="headerlink" title="5. 数组"></a>5. 数组</h2><h2 id="6-多维数组"><a href="#6-多维数组" class="headerlink" title="6.多维数组"></a>6.多维数组</h2>
                 
             </div>
             <hr/>
@@ -519,7 +776,7 @@ string s4(10,'c');       //s4的内容是cccccccccc
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">奋斗</a>
+                    <a href="/about" rel="external nofollow noreferrer">Peng Zhang</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -542,7 +799,7 @@ string s4(10,'c');       //s4的内容是cccccccccc
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">奋斗</a>
+                    <a href="/about" target="_blank">Peng Zhang</a>
                     !
                 </span>
             </div>
@@ -740,18 +997,17 @@ string s4(10,'c');       //s4的内容是cccccccccc
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/31/Cpp%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%90%91%E9%87%8F%E4%B8%8E%E6%95%B0%E7%BB%84/">
+                <a href="/2021/04/08/Pytorch%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Cpp之字符串向量与数组">
+                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Pytorch之网络权重初始化">
                         
-                        <span class="card-title">Cpp之字符串向量与数组</span>
+                        <span class="card-title">Pytorch之网络权重初始化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -761,27 +1017,26 @@ string s4(10,'c');       //s4的内容是cccccccccc
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-08
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    编程基础
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/C-%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">C++基础</span>
+                    <a href="/tags/Pytorch/">
+                        <span class="chip bg-color">Pytorch</span>
                     </a>
                     
                 </div>
@@ -795,13 +1050,13 @@ string s4(10,'c');       //s4的内容是cccccccccc
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/30/Cpp%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/">
+                <a href="/2021/03/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B9%8B%E4%BD%8D%E8%BF%90%E7%AE%97/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Cpp变量和基本类型">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="计算机基础之位运算">
                         
-                        <span class="card-title">Cpp变量和基本类型</span>
+                        <span class="card-title">计算机基础之位运算</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -812,7 +1067,7 @@ string s4(10,'c');       //s4的内容是cccccccccc
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
                             </span>
                         <span class="publish-author">
                             
@@ -1035,7 +1290,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
                 <span id="year">2019-2021</span>
             
             <span id="year">2019</span>
-            <a href="/about" target="_blank">奋斗</a>
+            <a href="/about" target="_blank">Peng Zhang</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
             |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             <br>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="写博客的初衷, 机器学习，深度学习，python，Java">
+    <meta name="keywords" content="深度学习之Transformer, 机器学习，深度学习，python，Java">
     <meta name="description" content="2021年3月面试阿里失败，提升自己">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>写博客的初衷 | 个人Blog</title>
+    <title>深度学习之Transformer | 个人Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">写博客的初衷</h1>
+                    <h1 class="description center-align post-title">深度学习之Transformer</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                                <span class="chip bg-color">个人随笔</span>
+                            <a href="/tags/Pytorch/">
+                                <span class="chip bg-color">Pytorch</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                随笔
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                深度学习
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-29
+                    2021-04-09
                 </div>
                 
 
@@ -477,14 +477,25 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>每一张自信的笑脸后，都藏着一个咬紧牙关的灵魂。</strong></p>
-<p><strong>那些你看起来毫不费力的人，其实早已付出了远超常人的努力。</strong></p>
-<p><strong>归根结底，决定你价值的，永远是你的专业水平。</strong></p>
-<p><strong>不付出百倍的艰辛，就跑到别人的专业领域想分一块蛋糕，只能输得一败涂地。</strong></p>
-<p><strong>别低估专业，别高估自己</strong></p>
-<p><strong>术业有专攻，捱过沉寂，方得出众</strong></p>
-<p><strong>那些经常困于不安和焦虑的人，对未来往往有‘想太多’的毛病，与其在不同的领域辗转，不如沉下心来，选择一个方向并做到极致。人活一生，可以有很多选择，但没有一条路是捷径。只有怀着对专业的敬畏与执着，先把路走窄，脚踏实地，最后才能收获人生的豁然开朗。</strong> 以此自勉！！！</p>
-
+                <h1 id="Transformer-详解"><a href="#Transformer-详解" class="headerlink" title="Transformer 详解"></a>Transformer 详解</h1><h2 id="1-Transformer-直观认识"><a href="#1-Transformer-直观认识" class="headerlink" title="1.Transformer 直观认识"></a>1.Transformer 直观认识</h2><h2 id="2-Position-Encoding"><a href="#2-Position-Encoding" class="headerlink" title="2. Position Encoding"></a>2. Position Encoding</h2><h2 id="3-Self-Attention-Mechanism"><a href="#3-Self-Attention-Mechanism" class="headerlink" title="3. Self-Attention Mechanism"></a>3. Self-Attention Mechanism</h2><h2 id="4-残差连接与Layer-Normalization"><a href="#4-残差连接与Layer-Normalization" class="headerlink" title="4. 残差连接与Layer Normalization"></a>4. 残差连接与Layer Normalization</h2><h3 id="4-2-Layer-Normalization和Batch-Normalization"><a href="#4-2-Layer-Normalization和Batch-Normalization" class="headerlink" title="4.2 Layer Normalization和Batch Normalization"></a>4.2 Layer Normalization和Batch Normalization</h3><p>Batch Normalization使用mini-batch的均值和标准差对深度神经网络的隐藏层输入附加标准操作，有效提升训练速度，对于前向神经网络应用BN，使用简单的SGD优化器，训练速度也能有较大提升。</p>
+<ol>
+<li><p>BN的效果受制于batch大小，小batch未必能取得预期效果。</p>
+</li>
+<li><p>对于前向神经网络，可以很直接应用BN，因为其每一层具有固定的神经元数量，可直接存储每层网络各神经元的均值/方差统计信息以应用于模型预测，但是RNNs网络中不同的mini-batch可能具有不同的输入序列长度(深度)，计算统计信息困难，而且测试序列长度不能大于最大训练序列长度</p>
+</li>
+<li><p>BN也很难应用于在线学习模型，以及小mini-batch的分布式模型。</p>
+</li>
+</ol>
+<h3 id="4-3-BN实现"><a href="#4-3-BN实现" class="headerlink" title="4.3 BN实现"></a>4.3 BN实现</h3><p>BN的过程为</p>
+<p>​                      $$y=\frac{x-\bf{E}[x]}{\sqrt{\bf{Var[x]+\epsilon}}}*\gamma+\beta \tag{1}$$</p>
+<p>BN实际上是先对每一层的输出做一个标准正态分布的转换，然后对输出做一个仿射（affine）变换。这个过程中仿射变换的参数$\gamma$和$\beta$ 是可以<strong>学习的参数</strong>，通过反向传播进行更新，在<strong>Pytorch</strong>中是可以通过控制<code>affine=True/False</code>来指定这两个参数是否在网络的Backward的时候被学习，Pytorch中$\gamma$ 从<code>(0,1)</code>采样，$\beta$初始化为0。</p>
+<pre class=" language-python"><code class="language-python">torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>BatchNorm2d<span class="token punctuation">(</span>num_features<span class="token punctuation">,</span> eps<span class="token operator">=</span><span class="token number">1e</span><span class="token operator">-</span><span class="token number">05</span><span class="token punctuation">,</span> momentum<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span> affine<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> 
+                     track_running_stats<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+</code></pre>
+<p>关于BN的公式如下：</p>
+<p>​                                                       $$\mu_{\mathbf{\beta}} \leftarrow \frac{1}{m}\sum _\limits{i=1}^{m} x_i$$                    // mini-batch mean</p>
+<p>​                                                        $$\sigma_{\mathbf{\beta}}^2 \leftarrow \frac{1}{m}\sum <em>\limits{i=1}^{m}(x_i-\mu</em>{\beta})^2$$              // mini-batch variance</p>
+<h2 id="5-Encoder架构"><a href="#5-Encoder架构" class="headerlink" title="5. Encoder架构"></a>5. Encoder架构</h2><h2 id="6-Decoder架构"><a href="#6-Decoder架构" class="headerlink" title="6. Decoder架构"></a>6. Decoder架构</h2>
                 
             </div>
             <hr/>
@@ -510,7 +521,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://absent1353.github.io/2021/03/29/hello-world/">https://absent1353.github.io/2021/03/29/hello-world/</a>
+                    <a href="https://absent1353.github.io/2021/04/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BTransformer/">https://absent1353.github.io/2021/04/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BTransformer/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -548,8 +559,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                                    <span class="chip bg-color">个人随笔</span>
+                                <a href="/tags/Pytorch/">
+                                    <span class="chip bg-color">Pytorch</span>
                                 </a>
                             
                         </div>
@@ -721,17 +732,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/30/Java%E6%95%B0%E7%BB%84/">
+                <a href="/2021/04/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BTransformer/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Java数组">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="深度学习之Transformer">
                         
-                        <span class="card-title">Java数组</span>
+                        <span class="card-title">深度学习之Transformer</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -741,26 +753,27 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-30
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    编程基础
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">Java基础</span>
+                    <a href="/tags/Pytorch/">
+                        <span class="chip bg-color">Pytorch</span>
                     </a>
                     
                 </div>
@@ -774,13 +787,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/29/%E4%BD%A0%E5%A5%BD%E6%97%A7%E6%97%B6%E5%85%89/">
+                <a href="/2021/04/09/Leetcode-29-%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="写博客的初衷">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Leetcode-29.两数相除">
                         
-                        <span class="card-title">写博客的初衷</span>
+                        <span class="card-title">Leetcode-29.两数相除</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -791,14 +804,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-09
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                    随笔
+                            <a href="/categories/%E5%8A%9B%E6%89%A3/" class="post-category">
+                                    力扣
                                 </a>
                             
                             
@@ -808,8 +821,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                        <span class="chip bg-color">个人随笔</span>
+                    <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">
+                        <span class="chip bg-color">位运算</span>
                     </a>
                     
                 </div>

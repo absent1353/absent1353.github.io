@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="写博客的初衷, 机器学习，深度学习，python，Java">
+    <meta name="keywords" content="Pytorch之网络权重初始化, 机器学习，深度学习，python，Java">
     <meta name="description" content="2021年3月面试阿里失败，提升自己">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>写博客的初衷 | 个人Blog</title>
+    <title>Pytorch之网络权重初始化 | 个人Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">写博客的初衷</h1>
+                    <h1 class="description center-align post-title">Pytorch之网络权重初始化</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                                <span class="chip bg-color">个人随笔</span>
+                            <a href="/tags/Pytorch/">
+                                <span class="chip bg-color">Pytorch</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                随笔
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                深度学习
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-29
+                    2021-04-08
                 </div>
                 
 
@@ -477,13 +477,65 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>每一张自信的笑脸后，都藏着一个咬紧牙关的灵魂。</strong></p>
-<p><strong>那些你看起来毫不费力的人，其实早已付出了远超常人的努力。</strong></p>
-<p><strong>归根结底，决定你价值的，永远是你的专业水平。</strong></p>
-<p><strong>不付出百倍的艰辛，就跑到别人的专业领域想分一块蛋糕，只能输得一败涂地。</strong></p>
-<p><strong>别低估专业，别高估自己</strong></p>
-<p><strong>术业有专攻，捱过沉寂，方得出众</strong></p>
-<p><strong>那些经常困于不安和焦虑的人，对未来往往有‘想太多’的毛病，与其在不同的领域辗转，不如沉下心来，选择一个方向并做到极致。人活一生，可以有很多选择，但没有一条路是捷径。只有怀着对专业的敬畏与执着，先把路走窄，脚踏实地，最后才能收获人生的豁然开朗。</strong> 以此自勉！！！</p>
+                <h1 id="Pytorch-网络权重初始化"><a href="#Pytorch-网络权重初始化" class="headerlink" title="Pytorch: 网络权重初始化"></a>Pytorch: 网络权重初始化</h1><p>构建完网络，需要初始化权重，其实如果不手动初始化，声名网络时，pytorch有默认的初始化方式：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> torch
+x <span class="token operator">=</span> torch<span class="token punctuation">.</span>Tensor<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+x
+<span class="token operator">>></span><span class="token operator">></span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0.0000e+00</span><span class="token punctuation">,</span> <span class="token number">0.0000e+00</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">5.6052e-45</span><span class="token punctuation">,</span> <span class="token number">0.0000e+00</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token number">1.4013e-45</span><span class="token punctuation">,</span> <span class="token number">0.0000e+00</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<p>上面定义了一个tensor，但没初始化，而pytorch会自动对其进行初始化，只是初始化的参数无规律且相差甚远。如果对于一个没有预训练的网络，有可能难以使网路收敛。因此，在声明网络后，有必要手动对网络进行权重初始化。而一般采用<strong>正态分布</strong>的方式初始化权重。</p>
+<h2 id="1-1-初始化方法A"><a href="#1-1-初始化方法A" class="headerlink" title="1.1 初始化方法A"></a>1.1 初始化方法A</h2><p>先定义网络，加载权重</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">import</span> torch<span class="token punctuation">.</span>nn <span class="token keyword">as</span> nn
+<span class="token keyword">class</span> <span class="token class-name">NET</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Module<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true"># 声明网络</span>
+<span class="token triple-quoted-string string">'''
+ 定义网络层
+'''</span>
+net <span class="token operator">=</span> NET<span class="token punctuation">(</span><span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 定义网络</span>
+
+<span class="token keyword">def</span> <span class="token function">weight_init</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>  <span class="token comment" spellcheck="true">#初始化权重</span>
+    <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>m<span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Conv3d<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        n <span class="token operator">=</span> m<span class="token punctuation">.</span>kernel_size<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> m<span class="token punctuation">.</span>kernel_size<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> m<span class="token punctuation">.</span>kernel_size<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">*</span> m<span class="token punctuation">.</span>out_channels
+        m<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">.</span>normal_<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> math<span class="token punctuation">.</span>sqrt<span class="token punctuation">(</span><span class="token number">2.0</span> <span class="token operator">/</span> n<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        m<span class="token punctuation">.</span>bias<span class="token punctuation">.</span>data<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>m<span class="token punctuation">,</span> nn<span class="token punctuation">.</span>BatchNorm3d<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        m<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">.</span>fill_<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+        m<span class="token punctuation">.</span>bias<span class="token punctuation">.</span>data<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>m<span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        m<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">.</span>normal_<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.02</span><span class="token punctuation">)</span>
+        m<span class="token punctuation">.</span>bias<span class="token punctuation">.</span>data<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        
+net<span class="token punctuation">.</span>apply<span class="token punctuation">(</span>weight_init<span class="token punctuation">)</span>  <span class="token comment" spellcheck="true"># 加载权重</span>
+</code></pre>
+<p>如果对于softmax回归，则可以有如下定义：</p>
+<pre class=" language-python"><code class="language-python">net <span class="token operator">=</span> nn<span class="token punctuation">.</span>Sequential<span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Flatten<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">(</span><span class="token number">784</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">def</span> <span class="token function">init_weights</span><span class="token punctuation">(</span>m<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">if</span> type<span class="token punctuation">(</span>m<span class="token punctuation">)</span> <span class="token operator">==</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">:</span>
+        nn<span class="token punctuation">.</span>init<span class="token punctuation">.</span>normal_<span class="token punctuation">(</span>m<span class="token punctuation">.</span>weight<span class="token punctuation">,</span> std<span class="token operator">=</span><span class="token number">0.01</span><span class="token punctuation">)</span>
+
+net<span class="token punctuation">.</span>apply<span class="token punctuation">(</span>init_weights<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="1-2-初始化方法B"><a href="#1-2-初始化方法B" class="headerlink" title="1.2 初始化方法B"></a>1.2 初始化方法B</h2><pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">NET</span><span class="token punctuation">(</span>nn<span class="token punctuation">.</span>Modele<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">__init__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        super<span class="token punctuation">(</span>NET<span class="token punctuation">,</span> self<span class="token punctuation">)</span><span class="token punctuation">.</span>__init__<span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token triple-quoted-string string">'''
+        定义网络层
+        '''</span>
+
+        <span class="token comment" spellcheck="true"># 初始化权重</span>
+        <span class="token keyword">for</span> m <span class="token keyword">in</span> self<span class="token punctuation">.</span>modules<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            <span class="token keyword">if</span> isinstance<span class="token punctuation">(</span>m<span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Conv3d<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                nn<span class="token punctuation">.</span>init<span class="token punctuation">.</span>kaiming_normal_<span class="token punctuation">(</span>m<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">)</span>
+            <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>m<span class="token punctuation">,</span> nn<span class="token punctuation">.</span>BatchNorm3d<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                m<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">.</span>fill_<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+                m<span class="token punctuation">.</span>bias<span class="token punctuation">.</span>data<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token keyword">elif</span> isinstance<span class="token punctuation">(</span>m<span class="token punctuation">,</span> nn<span class="token punctuation">.</span>Linear<span class="token punctuation">)</span><span class="token punctuation">:</span>
+                m<span class="token punctuation">.</span>weight<span class="token punctuation">.</span>data<span class="token punctuation">.</span>normal_<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.02</span><span class="token punctuation">)</span>
+                m<span class="token punctuation">.</span>bias<span class="token punctuation">.</span>data<span class="token punctuation">.</span>zero_<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
 
                 
             </div>
@@ -510,7 +562,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://absent1353.github.io/2021/03/29/hello-world/">https://absent1353.github.io/2021/03/29/hello-world/</a>
+                    <a href="https://absent1353.github.io/2021/04/08/Pytorch%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96/">https://absent1353.github.io/2021/04/08/Pytorch%E4%B9%8B%E7%BD%91%E7%BB%9C%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -548,8 +600,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                                    <span class="chip bg-color">个人随笔</span>
+                                <a href="/tags/Pytorch/">
+                                    <span class="chip bg-color">Pytorch</span>
                                 </a>
                             
                         </div>
@@ -725,13 +777,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/30/Java%E6%95%B0%E7%BB%84/">
+                <a href="/2021/04/08/Pytorch%E4%B9%8B%E5%88%9D%E5%A7%8B%E5%8C%96/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Java数组">
+                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="Pytorch之初始化">
                         
-                        <span class="card-title">Java数组</span>
+                        <span class="card-title">Pytorch之初始化</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -742,8 +794,57 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-30
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-08
                         </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Pytorch/">
+                        <span class="chip bg-color">Pytorch</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/03/31/Cpp%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%90%91%E9%87%8F%E4%B8%8E%E6%95%B0%E7%BB%84/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Cpp之字符串向量与数组">
+                        
+                        <span class="card-title">Cpp之字符串向量与数组</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -759,57 +860,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">Java基础</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/03/29/%E4%BD%A0%E5%A5%BD%E6%97%A7%E6%97%B6%E5%85%89/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="写博客的初衷">
-                        
-                        <span class="card-title">写博客的初衷</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                    随笔
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                        <span class="chip bg-color">个人随笔</span>
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">C++基础</span>
                     </a>
                     
                 </div>

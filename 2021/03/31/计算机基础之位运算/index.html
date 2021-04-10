@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="写博客的初衷, 机器学习，深度学习，python，Java">
+    <meta name="keywords" content="计算机基础之位运算, 机器学习，深度学习，python，Java">
     <meta name="description" content="2021年3月面试阿里失败，提升自己">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>写博客的初衷 | 个人Blog</title>
+    <title>计算机基础之位运算 | 个人Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">写博客的初衷</h1>
+                    <h1 class="description center-align post-title">计算机基础之位运算</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                                <span class="chip bg-color">个人随笔</span>
+                            <a href="/tags/C-%E5%9F%BA%E7%A1%80/">
+                                <span class="chip bg-color">C++基础</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                随笔
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="post-category">
+                                编程基础
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-29
+                    2021-03-31
                 </div>
                 
 
@@ -477,13 +477,134 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>每一张自信的笑脸后，都藏着一个咬紧牙关的灵魂。</strong></p>
-<p><strong>那些你看起来毫不费力的人，其实早已付出了远超常人的努力。</strong></p>
-<p><strong>归根结底，决定你价值的，永远是你的专业水平。</strong></p>
-<p><strong>不付出百倍的艰辛，就跑到别人的专业领域想分一块蛋糕，只能输得一败涂地。</strong></p>
-<p><strong>别低估专业，别高估自己</strong></p>
-<p><strong>术业有专攻，捱过沉寂，方得出众</strong></p>
-<p><strong>那些经常困于不安和焦虑的人，对未来往往有‘想太多’的毛病，与其在不同的领域辗转，不如沉下心来，选择一个方向并做到极致。人活一生，可以有很多选择，但没有一条路是捷径。只有怀着对专业的敬畏与执着，先把路走窄，脚踏实地，最后才能收获人生的豁然开朗。</strong> 以此自勉！！！</p>
+                <h1 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h1><p>程序中所有数在计算机内存中都是以二进制的形式存储的，位操作是程序设计中对位模式或二进制数的一元和二元操作。现代架构中，位运算速度通常宇加法运算相同(仍快于乘法运算)。</p>
+<p>运算符包含取反，按位与，按位或，按位异或；bit位还可以进行移位，左移运算，向左进行移位操作，高位丢弃，低位补充0，右移运算，向右进行移位操作，对无符号数，高位补0，对于有符号数，高位补符号位。</p>
+<p>在<code>C/C++</code>中一个char类型变量在内存中是一个字节，即8bit，每个bit都可以作为一个开关使用，作为标志位。</p>
+<h3 id="1-基础位运算符号"><a href="#1-基础位运算符号" class="headerlink" title="1. 基础位运算符号"></a>1. 基础位运算符号</h3><p>将C++的十进制整型转为二进制代码可以写作：</p>
+<pre class=" language-bash"><code class="language-bash"><span class="token comment" spellcheck="true">#include &lt;iostream></span>
+using namespace std<span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">#define MAX 32</span>
+int main<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"Enter the Decimal number :"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+    int num,i <span class="token operator">=</span> 0<span class="token punctuation">;</span>
+    cin<span class="token operator">>></span>num<span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span><span class="token string">"Decimal to binary:"</span><span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+    int bin<span class="token punctuation">[</span>MAX<span class="token punctuation">]</span>,length <span class="token operator">=</span> 0<span class="token punctuation">;</span>
+    do<span class="token punctuation">{</span>
+        bin<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> num % 2<span class="token punctuation">;</span>
+        num <span class="token operator">=</span> num/2<span class="token punctuation">;</span>
+        i++<span class="token punctuation">;</span>
+        length++<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span> <span class="token keyword">while</span> <span class="token punctuation">(</span>num<span class="token operator">!=</span>1<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bin<span class="token punctuation">[</span>length<span class="token punctuation">]</span><span class="token operator">=</span>num<span class="token punctuation">;</span>
+    length++<span class="token punctuation">;</span>
+    for<span class="token punctuation">(</span>i <span class="token operator">=</span> length-1<span class="token punctuation">;</span>i<span class="token operator">>=</span>0<span class="token punctuation">;</span>i--<span class="token punctuation">)</span>
+        cout<span class="token operator">&lt;&lt;</span>bin<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    cout<span class="token operator">&lt;&lt;</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> 0<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>运算符：</p>
+<p>&amp; 与运算符，两个位都是1时，结果为1，否则为0</p>
+<pre class=" language-bash"><code class="language-bash">    1 0 0 1 1
+  <span class="token operator">&amp;</span> 1 1 0 0 1
+  ----------------------
+    1 0 0 0 1
+</code></pre>
+<p>| 按位或，两个位都是0时，结果为0，否则为1</p>
+<pre class=" language-bash"><code class="language-bash">    1 0 0 1 1
+  <span class="token operator">|</span> 1 1 0 0 1
+  ----------------------
+    1 1 0 1 1
+</code></pre>
+<p>^ 异或运算，两个位相同则为0，不同则为1</p>
+<pre class=" language-bash"><code class="language-bash">    1 0 0 1 1
+  ^ 1 1 0 0 1
+  ----------------------
+    0 1 0 1 0
+</code></pre>
+<p>~ 取反运算，0则变为1，1则变为0</p>
+<pre class=" language-bash"><code class="language-bash">  ~ 1 0 0 1 1
+  ----------------------
+    0 1 1 0 0
+</code></pre>
+<p>&lt;&lt; 左移运算，向左进行移位操作，高位丢弃，低位补0</p>
+<pre class=" language-bash"><code class="language-bash">int a <span class="token operator">=</span> 8<span class="token punctuation">;</span>
+a <span class="token operator">&lt;&lt;</span> 3<span class="token punctuation">;</span>
+移位前：0000 0000 0000 0000 0000 0000 1000
+移位后：0000 0000 0000 0000 0000 0100 0000
+</code></pre>
+<p><code>&gt;&gt;</code>右移运算，向右进行移位操作，对无符号数，高位补0，有符号数，高位补符号位，右移相当于除以2的n次方。</p>
+<pre class=" language-bash"><code class="language-bash">unsigned int a <span class="token operator">=</span> 8<span class="token punctuation">;</span>
+a <span class="token operator">>></span> 3<span class="token punctuation">;</span>
+移位前：0000 0000 0000 0000 0000 0000 0000 1000
+移位后：0000 0000 0000 0000 0000 0000 0000 0001
+
+int a <span class="token operator">=</span> -8<span class="token punctuation">;</span>
+a <span class="token operator">>></span> 3<span class="token punctuation">;</span>
+移位前：1111 1111 1111 1111 1111 1111 1111 1000
+移位前：1111 1111 1111 1111 1111 1111 1111 1111
+</code></pre>
+<img src="/2021/03/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B9%8B%E4%BD%8D%E8%BF%90%E7%AE%97/%E5%8F%B3%E7%A7%BB%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6.jpg" class="" title="负数右移位运算符">
+
+<p>示例：</p>
+<pre class=" language-bash"><code class="language-bash">//40右移两位
+//0000 0000 0000 0000 0000 0000 0010 1000 初始值右移2位后，高位补符号位的0得：
+//0000 0000 0000 0000 0000 0000 0000 1010 换算成10进制为10
+//相当于5/ 2的2次方
+System.out.println<span class="token punctuation">(</span>40 <span class="token operator">>></span> 2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+//-40转换成二进制，首先需要写出对应正数40的二进制，然后将符号位置为1，符号位不变，各位取反，再加1，就得到了对应的负数的二进制
+// 0000 0000 0000 0000 0000 0000 0010 1000   40的二进制
+// 1000 0000 0000 0000 0000 0000 0010 1000   将符号位置为1
+// 1111 1111 1111 1111 1111 1111 1101 0111   除符号位外按位取反
+// 1111 1111 1111 1111 1111 1111 1101 1000   再加1，得-40的二进制
+//-40右移两位
+// 1111 1111 1111 1111 1111 1111 1111 1000   初始值右移2位后，高位补符号位的1得：
+// 1111 1111 1111 1111 1111 1111 1111 0110
+// 1111 1111 1111 1111 1111 1111 1111 0101  先减一
+// 1000 0000 0000 0000 0000 0000 0000 1010  按位取反
+转换为十进制是先减一再按位取反，不看符号位就是其对应的正数，换算成十进制为-10
+System.out.println<span class="token punctuation">(</span>-40 <span class="token operator">>></span> 2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+<h3 id="2-无符号右移-gt-gt-gt"><a href="#2-无符号右移-gt-gt-gt" class="headerlink" title="2.无符号右移&gt;&gt;&gt;"></a>2.无符号右移&gt;&gt;&gt;</h3><p>将十进制数字转换为二进制后，整段数字向右移动，低位溢出的需要截断，高位补0（不管符号位是什么）</p>
+<p>所以说，不管是负数还是正数，无符号右移之后符号位都会变为0，也就是都会变为正数。</p>
+<p>无符号右移对于正数来说和不同右移运算符一样。</p>
+<pre class=" language-python"><code class="language-python"><span class="token operator">-</span><span class="token number">1</span><span class="token operator">>></span><span class="token operator">></span><span class="token number">1</span>的结果变为<span class="token number">2147483647</span>，即java中的Integer<span class="token punctuation">.</span>MAX_VALUE
+<span class="token operator">//</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span>   初始值右移<span class="token number">1</span>位后，高位补符号位的<span class="token number">0</span>得：
+<span class="token operator">//</span> <span class="token number">0111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span> <span class="token number">1111</span>   右移溢出的被截断，高位补充<span class="token number">0</span>
+</code></pre>
+<h3 id="3-移位法则"><a href="#3-移位法则" class="headerlink" title="3.移位法则"></a>3.移位法则</h3><p>法则一：任何数左移（右移）32的倍数位等于该数本身。</p>
+<p>法则二：在位移运算m&lt;&lt;n的计算中，若n为正数，则实际移动的位数为n%32，若n为负数，则实际移动的位数为(32+n%32)，右移，同理。</p>
+<h3 id="4-使用场景"><a href="#4-使用场景" class="headerlink" title="4. 使用场景"></a>4. 使用场景</h3><ol>
+<li><p>幂运算时，比如求$M*2^N$，直接写作<code>M&lt;&lt;N</code></p>
+</li>
+<li><p>判断一个数的奇偶性，直接与1进行与操作<code>N&amp;1==1?奇数:偶数</code></p>
+<p>奇数和偶数在二进制中的区别就是最后一位是0还是1，奇数是1，偶数是0</p>
+</li>
+<li><p>不用临时变量交换两数的值</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">reverse</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> nums<span class="token punctuation">)</span><span class="token punctuation">{</span>  
+    <span class="token keyword">int</span> i<span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> j <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">length</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">while</span><span class="token punctuation">(</span>j<span class="token operator">></span>i<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">^</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">=</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">^</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">=</span>nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">^</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        j<span class="token operator">--</span><span class="token punctuation">;</span>
+        i<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> nums<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>其原理为：</p>
+<pre class=" language-python"><code class="language-python">int a <span class="token operator">=</span> <span class="token number">10</span>
+int b <span class="token operator">=</span> <span class="token number">25</span>
+a <span class="token operator">=</span> a <span class="token operator">^</span> b 
+b <span class="token operator">=</span> b <span class="token operator">^</span> a <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span> b <span class="token operator">=</span> b <span class="token operator">^</span> <span class="token punctuation">(</span>a <span class="token operator">^</span> b<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span> b <span class="token operator">=</span> a
+a <span class="token operator">=</span> a <span class="token operator">^</span> b <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span> a <span class="token operator">=</span> <span class="token punctuation">(</span>a <span class="token operator">^</span> b<span class="token punctuation">)</span> <span class="token operator">^</span> <span class="token punctuation">(</span>b <span class="token operator">^</span> <span class="token punctuation">(</span>a <span class="token operator">^</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">-</span><span class="token operator">></span> a <span class="token operator">=</span>b
+</code></pre>
+</li>
+</ol>
 
                 
             </div>
@@ -510,7 +631,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://absent1353.github.io/2021/03/29/hello-world/">https://absent1353.github.io/2021/03/29/hello-world/</a>
+                    <a href="https://absent1353.github.io/2021/03/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B9%8B%E4%BD%8D%E8%BF%90%E7%AE%97/">https://absent1353.github.io/2021/03/31/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80%E4%B9%8B%E4%BD%8D%E8%BF%90%E7%AE%97/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -548,8 +669,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                                    <span class="chip bg-color">个人随笔</span>
+                                <a href="/tags/C-%E5%9F%BA%E7%A1%80/">
+                                    <span class="chip bg-color">C++基础</span>
                                 </a>
                             
                         </div>
@@ -725,13 +846,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/30/Java%E6%95%B0%E7%BB%84/">
+                <a href="/2021/03/31/Cpp%E4%B9%8B%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%90%91%E9%87%8F%E4%B8%8E%E6%95%B0%E7%BB%84/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="Java数组">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Cpp之字符串向量与数组">
                         
-                        <span class="card-title">Java数组</span>
+                        <span class="card-title">Cpp之字符串向量与数组</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -742,7 +863,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-30
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-31
                         </span>
                         <span class="publish-author">
                             
@@ -759,8 +880,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Java%E5%9F%BA%E7%A1%80/">
-                        <span class="chip bg-color">Java基础</span>
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">C++基础</span>
                     </a>
                     
                 </div>
@@ -774,13 +895,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/29/%E4%BD%A0%E5%A5%BD%E6%97%A7%E6%97%B6%E5%85%89/">
+                <a href="/2021/03/30/Cpp%E5%8F%98%E9%87%8F%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="写博客的初衷">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Cpp变量和基本类型">
                         
-                        <span class="card-title">写博客的初衷</span>
+                        <span class="card-title">Cpp变量和基本类型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -791,14 +912,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-30
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                    随笔
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    编程基础
                                 </a>
                             
                             
@@ -808,8 +929,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                        <span class="chip bg-color">个人随笔</span>
+                    <a href="/tags/C-%E5%9F%BA%E7%A1%80/">
+                        <span class="chip bg-color">C++基础</span>
                     </a>
                     
                 </div>
