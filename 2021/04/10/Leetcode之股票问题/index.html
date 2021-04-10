@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="深度学习之Transformer, 机器学习，深度学习，python，Java">
+    <meta name="keywords" content="Leetcode之股票问题, 机器学习，深度学习，python，Java">
     <meta name="description" content="2021年3月面试阿里失败，提升自己">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>深度学习之Transformer | 个人Blog</title>
+    <title>Leetcode之股票问题 | 个人Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">深度学习之Transformer</h1>
+                    <h1 class="description center-align post-title">Leetcode之股票问题</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Pytorch/">
-                                <span class="chip bg-color">Pytorch</span>
+                            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                                <span class="chip bg-color">动态规划</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                深度学习
+                            <a href="/categories/%E5%8A%9B%E6%89%A3/" class="post-category">
+                                力扣
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-09
+                    2021-04-10
                 </div>
                 
 
@@ -477,25 +477,84 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Transformer-详解"><a href="#Transformer-详解" class="headerlink" title="Transformer 详解"></a>Transformer 详解</h1><h2 id="1-Transformer-直观认识"><a href="#1-Transformer-直观认识" class="headerlink" title="1.Transformer 直观认识"></a>1.Transformer 直观认识</h2><h2 id="2-Position-Encoding"><a href="#2-Position-Encoding" class="headerlink" title="2. Position Encoding"></a>2. Position Encoding</h2><h2 id="3-Self-Attention-Mechanism"><a href="#3-Self-Attention-Mechanism" class="headerlink" title="3. Self-Attention Mechanism"></a>3. Self-Attention Mechanism</h2><h2 id="4-残差连接与Layer-Normalization"><a href="#4-残差连接与Layer-Normalization" class="headerlink" title="4. 残差连接与Layer Normalization"></a>4. 残差连接与Layer Normalization</h2><h3 id="4-2-Layer-Normalization和Batch-Normalization"><a href="#4-2-Layer-Normalization和Batch-Normalization" class="headerlink" title="4.2 Layer Normalization和Batch Normalization"></a>4.2 Layer Normalization和Batch Normalization</h3><p>Batch Normalization使用mini-batch的均值和标准差对深度神经网络的隐藏层输入附加标准操作，有效提升训练速度，对于前向神经网络应用BN，使用简单的SGD优化器，训练速度也能有较大提升。</p>
-<ol>
-<li><p>BN的效果受制于batch大小，小batch未必能取得预期效果。</p>
-</li>
-<li><p>对于前向神经网络，可以很直接应用BN，因为其每一层具有固定的神经元数量，可直接存储每层网络各神经元的均值/方差统计信息以应用于模型预测，但是RNNs网络中不同的mini-batch可能具有不同的输入序列长度(深度)，计算统计信息困难，而且测试序列长度不能大于最大训练序列长度</p>
-</li>
-<li><p>BN也很难应用于在线学习模型，以及小mini-batch的分布式模型。</p>
-</li>
-</ol>
-<h3 id="4-3-BN实现"><a href="#4-3-BN实现" class="headerlink" title="4.3 BN实现"></a>4.3 BN实现</h3><p>BN的过程为</p>
-<p>​                      $$y=\frac{x-\bf{E}[x]}{\sqrt{\bf{Var[x]+\epsilon}}}*\gamma+\beta \tag{1}$$</p>
-<p>BN实际上是先对每一层的输出做一个标准正态分布的转换，然后对输出做一个仿射（affine）变换。这个过程中仿射变换的参数$\gamma$和$\beta$ 是可以<strong>学习的参数</strong>，通过反向传播进行更新，在<strong>Pytorch</strong>中是可以通过控制<code>affine=True/False</code>来指定这两个参数是否在网络的Backward的时候被学习，Pytorch中$\gamma$ 从<code>(0,1)</code>采样，$\beta$初始化为0。</p>
-<pre class=" language-python"><code class="language-python">torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>BatchNorm2d<span class="token punctuation">(</span>num_features<span class="token punctuation">,</span> eps<span class="token operator">=</span><span class="token number">1e</span><span class="token operator">-</span><span class="token number">05</span><span class="token punctuation">,</span> momentum<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span> affine<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> 
-                     track_running_stats<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+                <h1 id="股票问题系列通解"><a href="#股票问题系列通解" class="headerlink" title="股票问题系列通解"></a>股票问题系列通解</h1><h2 id="1-包含题目"><a href="#1-包含题目" class="headerlink" title="1.包含题目"></a>1.包含题目</h2><p>LeetCode121.买卖股票的最佳时机</p>
+<p>LeetCode122.买卖股票的最佳时机 II</p>
+<p>LeetCode123.买卖股票的最佳时机 III</p>
+<p>LeetCode188.买卖股票的最佳时机 IV</p>
+<p>LeetCode309.最佳买卖股票时机含冷冻期</p>
+<p>LeetCode714.最佳买卖股票时机含手续费</p>
+<h2 id="2-通用情况"><a href="#2-通用情况" class="headerlink" title="2. 通用情况"></a>2. 通用情况</h2><p>符号介绍：</p>
+<ul>
+<li><code>n</code>表示股票价格数组的长度</li>
+<li><code>i</code>表示第<code>i</code>天(取值为<code>0~n-1</code>)</li>
+<li><code>k</code> 表示允许的最大交易次数</li>
+<li>用<code>T[i][k]</code>表示在<code>i</code>天结束时，最多进行<code>k</code>次交易的情况下可以获得的最大收益。</li>
+</ul>
+<p>动态规划的基准情况为$T[-1][k] = T[i][0] = 0$，表示没有进行股票交易时没有收益，第一天对应<code>i=0</code>，因此<code>i=-1</code>表示没有股票交易。如果可以将<code>T[i][k]</code>关联到子问题，例如<code>T[i-1][k]</code>，<code>T[i][k-1]</code>，<code>T[i-1][k-1]</code>等子问题，就能得到状态转移方程。如何得到状态转移方程，最直接的办法是看第<code>i</code>天可能的操作，本题型中操作为<strong>买入，卖出，休息</strong>，通过计算三种操作获取最大收益，当然限制条件为：<strong>规定不能同时进行多次交易，因此如果决定在第<code>i</code>天买入，在买入之前必须持有<code>0</code>份股票，如果决定在第<code>i</code>天卖出，在卖出之前必须恰好持有<code>1</code>份股票</strong>，持有股票的数量是上文提及到的隐藏因素，该因素是影响第<code>i</code>天可以进行的操作，进而影响最大收益。</p>
+<p>对<code>T[i][k]</code>的定义需要分成两项：</p>
+<p><code>T[i][k][0]</code> 表示第<code>i</code>天结束时，最多进行<code>k</code>次交易且在进行操作后持有<code>0</code>份股票的情况下获得的最大收益(金钱数)。</p>
+<p><code>T[i][k][1]</code>表示在第<code>i</code>天结束时，最多进行<code>k</code>次交易且在进行操作后持有<code>1</code>份股票的情况下可以获得的最大收益(金钱数)。</p>
+<p>使用新的状态表示后，基准和状态转移方程分别为：</p>
+<p>基准情况：</p>
+<pre class=" language-bash"><code class="language-bash">T<span class="token punctuation">[</span>-1<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>0<span class="token punctuation">]</span> <span class="token operator">=</span> 0
+T<span class="token punctuation">[</span>-1<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span> <span class="token operator">=</span> -Infinity
+T<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>0<span class="token punctuation">]</span><span class="token punctuation">[</span>0<span class="token punctuation">]</span> <span class="token operator">=</span> 0
+T<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>0<span class="token punctuation">]</span><span class="token punctuation">[</span>1<span class="token punctuation">]</span> <span class="token operator">=</span> -Infinity
 </code></pre>
-<p>关于BN的公式如下：</p>
-<p>​                                                       $$\mu_{\mathbf{\beta}} \leftarrow \frac{1}{m}\sum _\limits{i=1}^{m} x_i$$                    // mini-batch mean</p>
-<p>​                                                        $$\sigma_{\mathbf{\beta}}^2 \leftarrow \frac{1}{m}\sum <em>\limits{i=1}^{m}(x_i-\mu</em>{\beta})^2$$              // mini-batch variance</p>
-<h2 id="5-Encoder架构"><a href="#5-Encoder架构" class="headerlink" title="5. Encoder架构"></a>5. Encoder架构</h2><h2 id="6-Decoder架构"><a href="#6-Decoder架构" class="headerlink" title="6. Decoder架构"></a>6. Decoder架构</h2>
+<p>状态转移方程：</p>
+<pre class=" language-python"><code class="language-python">T<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">=</span>max<span class="token punctuation">(</span>T<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> T<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+T<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> max<span class="token punctuation">(</span>T<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> T<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">-</span> prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<p>基准情况中，$T[-1][k][0] = T[i][0][0] = 0 $的含义与上文同，$T[-1][k][1]= T[i][0][1] = -Infinity$ 含义指在没有进行股票交易时不允许持有股票。</p>
+<p>对于状态转移方程中的<code>T[i][k][0]</code>，第<code>i</code>天进行的操作只有休息或卖出，因为在第<code>i</code>天结束时持有的股票数量为<code>0</code>。<code>T[i - 1][k][0]</code> 是休息操作可以获得最大收益，<code>T[i - 1][k][1] + prices[i]</code>是<strong>卖出</strong>操作可以得到最大收益。允许的最大交易次数是不变的，因为每次交易包含两次成对的操作，<strong>买入</strong>和<strong>卖出</strong>。只有<strong>买入</strong>操作会改变允许的最大交易次数</p>
+<p>对于状态转移方程中的<code>T[i][k][1]</code>，第<code>i</code>天进行的操作只有休息或买入，因为在第<code>i</code>天结束时持有股票数量为<code>1</code>。<code>T[i-1][k][1]</code> 是休息操作可以得到的最大收益，<code>T[i-1][k-1][0] - prices[i]</code>是买入操作可以得到的最大收益。允许的最大交易次数减少了一次，因为每次<strong>买入</strong>操作会使用一次交易。</p>
+<p>为得到最后一天结束时最大收益，遍历股票价格数组，根据状态转移方程计算<code>T[i][k][0]</code>和<code>T[i][k][1]</code>的值，最终答案是<code>T[n-1][k][0]</code>，因为结束时持有0份股票收益一定大于持有1份股票的收益。</p>
+<h2 id="3-应用"><a href="#3-应用" class="headerlink" title="3. 应用"></a>3. 应用</h2><h3 id="3-1-k-1"><a href="#3-1-k-1" class="headerlink" title="3.1. k=1"></a>3.1. k=1</h3><p>每天有两个未知变量，<code>T[i][1][0]</code>和<code>T[i][1][1]</code>，状态转移方程如下：</p>
+<pre class=" language-python"><code class="language-python">T<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> max<span class="token punctuation">(</span>T<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span>T<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token operator">+</span>prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+T<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> max<span class="token punctuation">(</span>T<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span>T<span class="token punctuation">[</span>i<span class="token number">-1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">-</span>prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">=</span> max<span class="token punctuation">(</span>T<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span>prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<p>第二个状态转移方程利用了$T[i-1][0][0]=0$ </p>
+<p>题目： LeetCode121 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/">买卖股票的最佳时机</a></p>
+<p>给定一个数组 prices ，它的第 i 个元素 prices[i] 表示一支给定股票第 i 天的价格。</p>
+<p>你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。</p>
+<p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0 。</p>
+<pre class=" language-python"><code class="language-python">输入：<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span>
+输出：<span class="token number">5</span>
+解释：在第 <span class="token number">2</span> 天（股票价格 <span class="token operator">=</span> <span class="token number">1</span>）的时候买入，在第 <span class="token number">5</span> 天（股票价格 <span class="token operator">=</span> <span class="token number">6</span>）的时候卖出，最大利润 <span class="token operator">=</span> <span class="token number">6</span><span class="token operator">-</span><span class="token number">1</span> <span class="token operator">=</span> <span class="token number">5</span> 。
+     注意利润不能是 <span class="token number">7</span><span class="token operator">-</span><span class="token number">1</span> <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">,</span> 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。
+</code></pre>
+<p>解题思路：</p>
+<p>推导状态转移方程：</p>
+<p><code>dp[i][0]</code>：规定了今天不持股，有以下两种情况：</p>
+<p>1.昨天不持股，今天什么都不做；<br>        2.昨天持股，今天卖出股票（现金数增加），<br><code>dp[i][1]</code>：规定了今天持股，有以下两种情况：</p>
+<ol>
+<li>昨天持股，今天什么都不做（现金数与昨天一样）；</li>
+<li>昨天不持股，今天买入股票（注意：只允许交易一次，因此手上的现金数就是当天的股价的相反数）</li>
+</ol>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">maxProfit</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> prices<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> len <span class="token operator">=</span> prices<span class="token punctuation">.</span>length<span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 特殊判断</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>len <span class="token operator">&lt;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>len<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// dp[i][0] 下标为 i 这天结束的时候，不持股，手上拥有的现金数</span>
+        <span class="token comment" spellcheck="true">// dp[i][1] 下标为 i 这天结束的时候，持股，手上拥有的现金数</span>
+        <span class="token comment" spellcheck="true">// 初始化：不持股显然为 0，持股就需要减去第 1 天（下标为 0）的股价</span>
+        dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token operator">-</span>prices<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// 从第 2 天开始遍历</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">+</span> prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 这里采用dp[i][1] = -prices[i]是因为只允许交易一次，因此在买(-prices[i])之前是0，而不是dp[i][0]</span>
+            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">max</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token operator">-</span>prices<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> dp<span class="token punctuation">[</span>len <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+
                 
             </div>
             <hr/>
@@ -521,7 +580,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://absent1353.github.io/2021/04/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BTransformer/">https://absent1353.github.io/2021/04/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BTransformer/</a>
+                    <a href="https://absent1353.github.io/2021/04/10/Leetcode%E4%B9%8B%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98/">https://absent1353.github.io/2021/04/10/Leetcode%E4%B9%8B%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -559,8 +618,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Pytorch/">
-                                    <span class="chip bg-color">Pytorch</span>
+                                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                                    <span class="chip bg-color">动态规划</span>
                                 </a>
                             
                         </div>
@@ -732,9 +791,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/04/10/Leetcode%E4%B9%8B%E8%82%A1%E7%A5%A8%E9%97%AE%E9%A2%98/">
                     <div class="card-image">
@@ -752,9 +812,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-10
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -767,6 +827,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -785,13 +846,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/09/Leetcode-29-%E4%B8%A4%E6%95%B0%E7%9B%B8%E9%99%A4/">
+                <a href="/2021/04/09/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BTransformer/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="Leetcode-29.两数相除">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="深度学习之Transformer">
                         
-                        <span class="card-title">Leetcode-29.两数相除</span>
+                        <span class="card-title">深度学习之Transformer</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -808,8 +869,8 @@
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8A%9B%E6%89%A3/" class="post-category">
-                                    力扣
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
                                 </a>
                             
                             
@@ -819,8 +880,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">
-                        <span class="chip bg-color">位运算</span>
+                    <a href="/tags/Pytorch/">
+                        <span class="chip bg-color">Pytorch</span>
                     </a>
                     
                 </div>
