@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="写博客的初衷, 机器学习，深度学习，python，Java">
+    <meta name="keywords" content="LeetCode-338-比特位计数, 机器学习，深度学习，python，Java">
     <meta name="description" content="Only the road is right,do not be afraid,it is short or distant,the road is right,do not be.">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>写博客的初衷 | 上研最帅的鹏神</title>
+    <title>LeetCode-338-比特位计数 | 上研最帅的鹏神</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">写博客的初衷</h1>
+                    <h1 class="description center-align post-title">LeetCode-338-比特位计数</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                                <span class="chip bg-color">个人随笔</span>
+                            <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">
+                                <span class="chip bg-color">位运算</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                随笔
+                            <a href="/categories/%E5%8A%9B%E6%89%A3/" class="post-category">
+                                力扣
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-29
+                    2021-04-11
                 </div>
                 
 
@@ -477,14 +477,77 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>每一张自信的笑脸后，都藏着一个咬紧牙关的灵魂。</strong></p>
-<p><strong>那些你看起来毫不费力的人，其实早已付出了远超常人的努力。</strong></p>
-<p><strong>归根结底，决定你价值的，永远是你的专业水平。</strong></p>
-<p><strong>不付出百倍的艰辛，就跑到别人的专业领域想分一块蛋糕，只能输得一败涂地。</strong></p>
-<p><strong>别低估专业，别高估自己</strong></p>
-<p><strong>术业有专攻，捱过沉寂，方得出众</strong></p>
-<p><strong>那些经常困于不安和焦虑的人，对未来往往有‘想太多’的毛病，与其在不同的领域辗转，不如沉下心来，选择一个方向并做到极致。人活一生，可以有很多选择，但没有一条路是捷径。只有怀着对专业的敬畏与执着，先把路走窄，脚踏实地，最后才能收获人生的豁然开朗。</strong> 以此自勉！！！</p>
-
+                <p>给定一个非负整数 <strong>num</strong>。对于 <strong>0 ≤ i ≤ num</strong> 范围中的每个数字 <strong>i</strong> ，计算其二进制数中的 1 的数目并将它们作为数组返回。</p>
+<pre class=" language-bash"><code class="language-bash">输入: 2
+输出: <span class="token punctuation">[</span>0,1,1<span class="token punctuation">]</span>
+</code></pre>
+<pre class=" language-bash"><code class="language-bash">输入: 5
+输出: <span class="token punctuation">[</span>0,1,1,2,1,2<span class="token punctuation">]</span>
+</code></pre>
+<p>参考负雪明烛题解来求解，主要有以下几种方法：</p>
+<h3 id="1-遍历与统计"><a href="#1-遍历与统计" class="headerlink" title="1. 遍历与统计"></a>1. 遍历与统计</h3><p>使用python的内置函数<code>bin()</code>，遍历从0到num的每个数字，统计每个数字中二进制1的个数</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">countBits</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span>int<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> number <span class="token keyword">in</span> range<span class="token punctuation">(</span>num<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            res<span class="token punctuation">.</span>append<span class="token punctuation">(</span>bin<span class="token punctuation">(</span>number<span class="token punctuation">)</span><span class="token punctuation">.</span>count<span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> res 
+</code></pre>
+<h3 id="2-递归方法"><a href="#2-递归方法" class="headerlink" title="2. 递归方法"></a>2. 递归方法</h3><p>1 如果<code>i</code>是偶数，它的二进制 1 的位数与 <code>i/2</code> 的二进制 1 的位数相等，偶数二进制末尾是 0 ，右移一位等于 <code>i/2</code>，而二进制中 1 的个数没有变化。</p>
+<table>
+<thead>
+<tr>
+<th>十进制数</th>
+<th>二进制</th>
+<th>二进制中 1 的个数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>4</td>
+<td>100</td>
+<td>1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>10</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>2 如果 <code>i</code>是奇数，它的二进制 1 的位数 = <code>i - 1</code>的二进制位数 + 1,因为奇数的二进制末尾是 1，如果把末尾的 1 去掉就等于 i - 1，i - 1 是偶数，所以奇数 i 的二进制 1 的个数等于 i/2 中 1 的位数 + 1。</p>
+<table>
+<thead>
+<tr>
+<th>十进制数</th>
+<th>二进制</th>
+<th>二进制中 1 的个数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>5</td>
+<td>101</td>
+<td>2</td>
+</tr>
+<tr>
+<td>4</td>
+<td>100</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>python求解计算为：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">countBits</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> num<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> List<span class="token punctuation">[</span>int<span class="token punctuation">]</span><span class="token punctuation">:</span>
+        res <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
+        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span>num<span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
+            res<span class="token punctuation">.</span>append<span class="token punctuation">(</span>self<span class="token punctuation">.</span>count<span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> res 
+    <span class="token keyword">def</span> <span class="token function">count</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span>num<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">if</span> num <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> <span class="token number">0</span>
+        <span class="token keyword">if</span> num <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">:</span>
+            <span class="token keyword">return</span> self<span class="token punctuation">.</span>count<span class="token punctuation">(</span>num<span class="token number">-1</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token number">1</span>
+        <span class="token keyword">return</span> self<span class="token punctuation">.</span>count<span class="token punctuation">(</span>num<span class="token operator">//</span><span class="token number">2</span><span class="token punctuation">)</span>
+</code></pre>
+<h3 id=""><a href="#" class="headerlink" title=""></a></h3>
                 
             </div>
             <hr/>
@@ -510,7 +573,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://absent1353.github.io/2021/03/29/hello-world/">https://absent1353.github.io/2021/03/29/hello-world/</a>
+                    <a href="https://absent1353.github.io/2021/04/11/LeetCode-338-%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/">https://absent1353.github.io/2021/04/11/LeetCode-338-%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -548,8 +611,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                                    <span class="chip bg-color">个人随笔</span>
+                                <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">
+                                    <span class="chip bg-color">位运算</span>
                                 </a>
                             
                         </div>
@@ -725,13 +788,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/29/%E4%BD%A0%E5%A5%BD%E6%97%A7%E6%97%B6%E5%85%89/">
+                <a href="/2021/04/11/LeetCode-264-%E4%B8%91%E6%95%B0II/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="写博客的初衷">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="LeetCode-264-丑数II">
                         
-                        <span class="card-title">写博客的初衷</span>
+                        <span class="card-title">LeetCode-264-丑数II</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -742,14 +805,14 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-11
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E9%9A%8F%E7%AC%94/" class="post-category">
-                                    随笔
+                            <a href="/categories/%E5%8A%9B%E6%89%A3/" class="post-category">
+                                    力扣
                                 </a>
                             
                             
@@ -759,8 +822,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%B8%AA%E4%BA%BA%E9%9A%8F%E7%AC%94/">
-                        <span class="chip bg-color">个人随笔</span>
+                    <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%9C%80%E5%B0%8F%E5%A0%86/">
+                        <span class="chip bg-color">动态规划,最小堆</span>
                     </a>
                     
                 </div>
@@ -774,13 +837,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/">
+                <a href="/2021/04/11/LeetCode-191%E4%BD%8D1%E7%9A%84%E4%B8%AA%E6%95%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="深度学习之WordEmbedding">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="LeetCode-191位1的个数">
                         
-                        <span class="card-title">深度学习之WordEmbedding</span>
+                        <span class="card-title">LeetCode-191位1的个数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -791,14 +854,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-11
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
-                                    深度学习
+                            <a href="/categories/%E5%8A%9B%E6%89%A3/" class="post-category">
+                                    力扣
                                 </a>
                             
                             
@@ -808,8 +871,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/NLP/">
-                        <span class="chip bg-color">NLP</span>
+                    <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">
+                        <span class="chip bg-color">位运算</span>
                     </a>
                     
                 </div>
