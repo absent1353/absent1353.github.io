@@ -500,6 +500,40 @@
     <span class="token keyword">def</span> <span class="token function">hammingWeight</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">return</span> bin<span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">.</span>count<span class="token punctuation">(</span><span class="token string">"1"</span><span class="token punctuation">)</span>
 </code></pre>
+<p>方法2：右移动32次，使用<code>n&amp;1</code>得到二进制末尾是否有1，然后n右移动一位，实现方法为：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">hammingWeight</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        res <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">while</span> n<span class="token punctuation">:</span>
+            res <span class="token operator">+=</span> n <span class="token operator">&amp;</span> <span class="token number">1</span>
+            n <span class="token operator">>></span><span class="token operator">=</span> <span class="token number">1</span>
+        <span class="token keyword">return</span> res
+</code></pre>
+<p>方法3：消除二进制末尾的1</p>
+<p>使用<code>n &amp; (n - 1)</code>，可以把 n 的二进制中，最后出现的 1 改写成0。执行 <code>n &amp; (n - 1)</code> 使得 n 变成 0 的操作次数，就是 n 的二进制中 1 的个数。</p>
+<img src="/2021/04/11/LeetCode-191%E4%BD%8D1%E7%9A%84%E4%B8%AA%E6%95%B0/%E6%B6%88%E9%99%A4%E6%9C%AB%E5%B0%BE1.jpg" class="" title="使用n&amp;(n-1)消除末尾的1">
+
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">// you need to treat n as an unsigned value</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">hammingWeight</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> res <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token keyword">while</span><span class="token punctuation">(</span>n<span class="token operator">!=</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            res<span class="token operator">+=</span><span class="token number">1</span><span class="token punctuation">;</span>
+            n<span class="token operator">&amp;=</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> res<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>python版本为：</p>
+<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">hammingWeight</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
+        res <span class="token operator">=</span> <span class="token number">0</span>
+        <span class="token keyword">while</span> n<span class="token punctuation">:</span>
+            res <span class="token operator">+=</span> <span class="token number">1</span>
+            n <span class="token operator">=</span> n<span class="token operator">&amp;</span><span class="token punctuation">(</span>n<span class="token number">-1</span><span class="token punctuation">)</span>
+        <span class="token keyword">return</span> res 
+</code></pre>
 
                 
             </div>
