@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="大话数据结构之线性表, 机器学习，深度学习，python，Java">
+    <meta name="keywords" content="Pytorch之乘法, 机器学习，深度学习，python，Java">
     <meta name="description" content="Only the road is right,do not be afraid,it is short or distant,the road is right,do not be.">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>大话数据结构之线性表 | 上研最帅的鹏神</title>
+    <title>Pytorch之乘法 | 上研最帅的鹏神</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">大话数据结构之线性表</h1>
+                    <h1 class="description center-align post-title">Pytorch之乘法</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                                <span class="chip bg-color">数据结构</span>
+                            <a href="/tags/Pytorch/">
+                                <span class="chip bg-color">Pytorch</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="post-category">
-                                编程基础
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                深度学习
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-11
+                    2021-04-13
                 </div>
                 
 
@@ -477,21 +477,139 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="线性表"><a href="#线性表" class="headerlink" title="线性表"></a>线性表</h1><h2 id="1-线性表的抽象数据类型"><a href="#1-线性表的抽象数据类型" class="headerlink" title="1.线性表的抽象数据类型"></a>1.线性表的抽象数据类型</h2><pre class=" language-bash"><code class="language-bash">ADT 线性表<span class="token punctuation">(</span>List<span class="token punctuation">)</span>
-Data
-  DataType的元素
-Operation:
-    InitList<span class="token punctuation">(</span>*L<span class="token punctuation">)</span>: 初始化，建立一个空线性表L
-    ListEmpty<span class="token punctuation">(</span>L<span class="token punctuation">)</span>： 线性表为空，则返回true
-    ClearList<span class="token punctuation">(</span>*L<span class="token punctuation">)</span>：清空线性表
-    GetElem<span class="token punctuation">(</span>L,i,*e<span class="token punctuation">)</span>: 线性表L中第i个位置元素值返回给e
-    LocateElem<span class="token punctuation">(</span>L,e<span class="token punctuation">)</span>：线性表L中查找与给定值e相等的元素，如果查找成功，返回该元素在表中序号表示成功；否则，返回0表示失败
-    ListInsert<span class="token punctuation">(</span>*L,i,e<span class="token punctuation">)</span>：线性表L中第i个位置插入e
-    ListDelete<span class="token punctuation">(</span>*L,i,*e<span class="token punctuation">)</span>：删除L中第i个位置元素，并用e返回其值
-    ListLength<span class="token punctuation">(</span>L<span class="token punctuation">)</span>：返回线性表L的元素个数
-endADT
+                <h1 id="Pytorch总结之乘法"><a href="#Pytorch总结之乘法" class="headerlink" title="Pytorch总结之乘法"></a>Pytorch总结之乘法</h1><h2 id="1-torch-dot-：Computes-the-dot-product-inner-product-of-two-tensors"><a href="#1-torch-dot-：Computes-the-dot-product-inner-product-of-two-tensors" class="headerlink" title="1. torch.dot()：Computes the dot product (inner product) of two tensors."></a>1. torch.dot()：Computes the dot product (inner product) of two tensors.</h2><p>计算两个1-D 张量的点乘(内乘)</p>
+<pre class=" language-python"><code class="language-python">torch<span class="token punctuation">.</span>dot<span class="token punctuation">(</span>torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>torch<span class="token punctuation">.</span>tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+tensor<span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">)</span>
 </code></pre>
-<h2 id="2-线性表顺序存储结构"><a href="#2-线性表顺序存储结构" class="headerlink" title="2. 线性表顺序存储结构"></a>2. 线性表顺序存储结构</h2>
+<h2 id="2-torch-mm"><a href="#2-torch-mm" class="headerlink" title="2. torch.mm()"></a>2. torch.mm()</h2><p><strong>torch.mm(mat1,mat2,out=None)</strong>,<code>mat1(n×m)</code>，<code>mat2(m×d)</code>，输出out的维度是<code>n×d</code>，只用来计算两个2-D矩阵的矩阵乘法。</p>
+<pre class=" language-python"><code class="language-python">mat1<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+mat2<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>mat1<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>mat2<span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>mm<span class="token punctuation">(</span>mat1<span class="token punctuation">,</span>mat2<span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1.7958</span><span class="token punctuation">,</span>  <span class="token number">0.9623</span><span class="token punctuation">,</span>  <span class="token number">1.1487</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1.4397</span><span class="token punctuation">,</span>  <span class="token number">1.5324</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.6495</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">0.9807</span><span class="token punctuation">,</span>  <span class="token number">0.6286</span><span class="token punctuation">,</span>  <span class="token number">0.6537</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">0.4758</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.0650</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.9917</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span> <span class="token number">1.4798</span><span class="token punctuation">,</span>  <span class="token number">1.0518</span><span class="token punctuation">,</span>  <span class="token number">0.1219</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">0.3966</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.9454</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.9882</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1.6439</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">3.2201</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2.5399</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="3-torch-bmm"><a href="#3-torch-bmm" class="headerlink" title="3. torch.bmm()"></a>3. torch.bmm()</h2><p>**torch.bmm(bmat1,bmat2,out=None)**，其中<code>bmat1(B*n*m)</code>，<code>bmat2(B*m*d)</code>，输出维度是<code>(B*n*d)</code>。该函数的两个输入必须是3-D矩阵，且第一维相同(batch_size)</p>
+<pre class=" language-python"><code class="language-python">bmat1<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
+bmat2<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>
+res <span class="token operator">=</span> torch<span class="token punctuation">.</span>bmm<span class="token punctuation">(</span>bmat1<span class="token punctuation">,</span>bmat2<span class="token punctuation">)</span>
+res<span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="4-torch-matmul-input-other-out-None"><a href="#4-torch-matmul-input-other-out-None" class="headerlink" title="4.torch.matmul(input,other,out=None)"></a>4.torch.matmul(input,other,out=None)</h2><p>input–参与乘法的第一个tensor</p>
+<p>other–参与乘法的第二个tensor</p>
+<p>out–输出tensor</p>
+<p>两个tensors之间的矩阵乘法，具体怎么操作根据输入而定：</p>
+<ul>
+<li>两个矩阵都是一维的，该函数的功能与torch.dot()一样，返回两个一维tensor的点乘结果。</li>
+</ul>
+<pre class=" language-python"><code class="language-python">tensor1<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+tensor2<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>tensor1<span class="token punctuation">,</span>tensor2<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>tensor1<span class="token punctuation">,</span>tensor2<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token number">0.3897</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.1002</span><span class="token punctuation">,</span>  <span class="token number">1.0763</span><span class="token punctuation">,</span>  <span class="token number">0.8049</span><span class="token punctuation">]</span><span class="token punctuation">)</span> tensor<span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token number">0.4766</span><span class="token punctuation">,</span>  <span class="token number">0.3141</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.2110</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1.4327</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+tensor<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">2.6165</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>如果两个矩阵都是二维的，该函数功能与torch.mm()一样，返回两个二维矩阵的矩阵乘法</li>
+</ul>
+<pre class=" language-python"><code class="language-python">tensor1<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
+tensor2<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>tensor1<span class="token punctuation">,</span>tensor2<span class="token punctuation">)</span><span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>如果第一个tensor是一维的而第二个tensor是二维的，那么会在第一个tensor的维度上预填充一个1，然后执行二维矩阵乘法，最后将预填充的维度1去掉</li>
+</ul>
+<pre class=" language-python"><code class="language-python">tensor1<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span>
+tensor2<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>tensor1<span class="token punctuation">,</span>tensor2<span class="token punctuation">)</span><span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>如果第一个tensor是二维或者二维以上的，而第二个tensor是一维的，那么将执行矩阵-向量乘法。</li>
+</ul>
+<pre class=" language-python"><code class="language-python">tensor1 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>
+tensor2 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>tensor1<span class="token punctuation">,</span> tensor2<span class="token punctuation">)</span><span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>如果两个tensor都至少是一维的，而且至少一个tensor的维度大于2，那么会发生批处理矩阵乘法</li>
+</ul>
+<pre class=" language-python"><code class="language-python">tensor1<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
+tensor2<span class="token operator">=</span>torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>
+torch<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>tensor1<span class="token punctuation">,</span>tensor2<span class="token punctuation">)</span><span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>如果第一个tensor是一维的，则会为它预填充一个1的维度，执行完批处理乘法以后再删除</li>
+</ul>
+<pre class=" language-python"><code class="language-python">tensor1 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span>
+tensor2 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>tensor1<span class="token punctuation">,</span> tensor2<span class="token punctuation">)</span><span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>如果第二个tensor是一维的，则会为它预填充一个1的维度，执行完批处理乘法以后再删除</li>
+</ul>
+<pre class=" language-python"><code class="language-python">tensor1 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+tensor2 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>tensor1<span class="token punctuation">,</span> tensor2<span class="token punctuation">)</span><span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>非矩阵维度（例如batch维度，我理解的矩阵维度应该是维度的最后两个，比如（a,b,c,d）中的c和d）会广播，例如输入是（j,1,n,m）和（k,m,p）,那么输出为（j,k,n,p）</li>
+</ul>
+<pre class=" language-python"><code class="language-python">tensor1 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">)</span>
+tensor2 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>tensor1<span class="token punctuation">,</span> tensor2<span class="token punctuation">)</span><span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<pre class=" language-python"><code class="language-python">tensor1 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span>
+tensor2 <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>matmul<span class="token punctuation">(</span>tensor1<span class="token punctuation">,</span> tensor2<span class="token punctuation">)</span><span class="token punctuation">.</span>size<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+torch<span class="token punctuation">.</span>Size<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="5-torch-mul-矩阵逐元素乘法-element-wise"><a href="#5-torch-mul-矩阵逐元素乘法-element-wise" class="headerlink" title="5.torch.mul() 矩阵逐元素乘法(element-wise)"></a>5.torch.mul() 矩阵逐元素乘法(element-wise)</h2><p><code>torch.mul(a, b)</code>是矩阵a和b<strong>对应位相乘</strong>，a和b的<strong>维度必须相等</strong>，所以只要保证a和b的shape是broadcastable就可以。</p>
+<pre class=" language-python"><code class="language-python">a <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+b <span class="token operator">=</span> torch<span class="token punctuation">.</span>randn<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+<span class="token keyword">print</span><span class="token punctuation">(</span>torch<span class="token punctuation">.</span>mul<span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token operator">>></span><span class="token operator">></span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">1.1195</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">0.1328</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">0.7124</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">0.3879</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">0.0200</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.6061</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2.1039</span><span class="token punctuation">,</span>  <span class="token number">0.6094</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+tensor<span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token number">0.0224</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.6785</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">2.3553</span><span class="token punctuation">,</span>  <span class="token number">0.6823</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">0.0027</span><span class="token punctuation">,</span>  <span class="token number">0.0805</span><span class="token punctuation">,</span>  <span class="token number">0.2795</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.0810</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">0.0143</span><span class="token punctuation">,</span>  <span class="token number">0.4317</span><span class="token punctuation">,</span>  <span class="token number">1.4987</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.4341</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">0.0078</span><span class="token punctuation">,</span>  <span class="token number">0.2351</span><span class="token punctuation">,</span>  <span class="token number">0.8161</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">0.2364</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+</code></pre>
+<h2 id="6-乘法操作符-和"><a href="#6-乘法操作符-和" class="headerlink" title="6. 乘法操作符@和*"></a>6. 乘法操作符<code>@</code>和<code>*</code></h2><p><code>@</code>操作符可以执行矩阵乘法操作，类似于 torch.mm()，torch.bmm()，torch.matmul()</p>
+<p><code>*</code>操作可以执行逐元素矩阵乘法，使用方法 torch.mul() </p>
+
                 
             </div>
             <hr/>
@@ -517,7 +635,7 @@ endADT
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://absent1353.github.io/2021/04/11/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8/">https://absent1353.github.io/2021/04/11/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8/</a>
+                    <a href="https://absent1353.github.io/2021/04/13/Pytorch%E4%B9%8B%E4%B9%98%E6%B3%95/">https://absent1353.github.io/2021/04/13/Pytorch%E4%B9%8B%E4%B9%98%E6%B3%95/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -555,8 +673,8 @@ endADT
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                                    <span class="chip bg-color">数据结构</span>
+                                <a href="/tags/Pytorch/">
+                                    <span class="chip bg-color">Pytorch</span>
                                 </a>
                             
                         </div>
@@ -732,13 +850,13 @@ endADT
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/04/13/Pytorch%E4%B9%8B%E4%B9%98%E6%B3%95/">
+                <a href="/2021/04/13/Pytorch%E4%B9%8Beinsum/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Pytorch之乘法">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Pytorch之einsum">
                         
-                        <span class="card-title">Pytorch之乘法</span>
+                        <span class="card-title">Pytorch之einsum</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -781,13 +899,13 @@ endADT
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/11/LeetCode-264-%E4%B8%91%E6%95%B0II/">
+                <a href="/2021/04/11/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="LeetCode-264-丑数II">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="大话数据结构之线性表">
                         
-                        <span class="card-title">LeetCode-264-丑数II</span>
+                        <span class="card-title">大话数据结构之线性表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -804,8 +922,8 @@ endADT
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8A%9B%E6%89%A3/" class="post-category">
-                                    力扣
+                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="post-category">
+                                    编程基础
                                 </a>
                             
                             
@@ -815,8 +933,8 @@ endADT
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%9C%80%E5%B0%8F%E5%A0%86/">
-                        <span class="chip bg-color">动态规划,最小堆</span>
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
+                        <span class="chip bg-color">数据结构</span>
                     </a>
                     
                 </div>
