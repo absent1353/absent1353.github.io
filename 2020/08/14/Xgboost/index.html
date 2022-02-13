@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="LeetCode-264-丑数II, 机器学习，深度学习，python，Java">
+    <meta name="keywords" content="Xgboost1, 机器学习，深度学习，python，Java">
     <meta name="description" content="Only the road is right,do not be afraid,it is short or distant,the road is right,do not be.">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>LeetCode-264-丑数II | 上研最帅的鹏神</title>
+    <title>Xgboost1 | 上研最帅的鹏神</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/11.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">LeetCode-264-丑数II</h1>
+                    <h1 class="description center-align post-title">Xgboost1</h1>
                 </div>
             </div>
         </div>
@@ -431,8 +431,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%9C%80%E5%B0%8F%E5%A0%86/">
-                                <span class="chip bg-color">动态规划,最小堆</span>
+                            <a href="/tags/Ensemble/">
+                                <span class="chip bg-color">Ensemble</span>
                             </a>
                         
                     </div>
@@ -443,8 +443,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%8A%9B%E6%89%A3/" class="post-category">
-                                力扣
+                            <a href="/categories/Machine-learning/" class="post-category">
+                                Machine learning
                             </a>
                         
                     </div>
@@ -456,7 +456,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-04-11
+                    2020-08-14
                 </div>
                 
 
@@ -477,90 +477,29 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>我们把只包含质因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。</p>
-<pre class=" language-bash"><code class="language-bash">输入: n <span class="token operator">=</span> 10
-输出: 12
-解释: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 是前 10 个丑数。
-</code></pre>
-<h3 id="1-动态规划"><a href="#1-动态规划" class="headerlink" title="1. 动态规划"></a>1. 动态规划</h3><p><strong>丑数的递推性质：丑数只包含因子2，3，5，因此丑数有’丑数=某较小的丑数×某因子’</strong>(10=5*2)</p>
-<p>设已知长度为<code>n</code>的抽数序列$x_1,…x_n$ ，求第$ n+1$个丑数 $x_{n+1}$ ，递推性质，丑数满足下面三种情况之一：</p>
-<p>$$x_{n+1}=\left{ \begin{aligned}  &amp; = &amp; x_a×2 \  &amp; = &amp; x_b×3 \  &amp; = &amp; x_c×5 \end{aligned} \right. \tag{1}$$</p>
-<p>递推公式为$x_{n+1} = min(x_a×2,x_b×3,x_c×5)$，$x_{n+1}$ 是最接近$x_{n}$ 的丑数，所以索引a/b/c满足：</p>
-<p>$$\left{ \begin{aligned}  x_a×2 &gt; &amp; x_n ≥  x_{a-1}×2 \  x_b×3 &gt; &amp; x_n ≥  x_{b-1}×3 \  x_c×5 &gt; &amp; x_n ≥  x_{c-1}×5 \end{aligned} \right. \tag{2}$$</p>
-<p>可设置指针 a,b,c 指向首个丑数（即 1 ），循环根据递推公式得到下个丑数，并每轮将对应指针执行 +1 即可。</p>
-<ul>
-<li><p>状态定义：动态规划表$dp[i]$表示第<code>i</code>个丑数</p>
-</li>
-<li><p>每轮计算$dp[i]$ 后，需要更新索引$a$，$b$，$c$ 的值，使其始终满足方程条件：分别独立判断$dp[i]$和$dp[a]*2$,$dp[b]*3$,$dp[c]*5$的大小关系，如相等则将对应的$a,b,c$ 加<code>1</code>。</p>
-<p>$$\left{ \begin{aligned}  dp[a]×2 &gt; &amp; dp[i-1] ≥  dp[a-1]×2 \  dp[b]×3 &gt; &amp; dp[i-1] ≥  dp[b-1]×3 \  dp[c]×5 &gt; &amp; dp[i-1] ≥  dp[c-1]×5 \end{aligned} \right. \tag{3}$$</p>
-</li>
-</ul>
-<p>​                                                                      $$dp[i]=min(dp[a]*2,dp[b]*3,dp[c]*5) \tag{4}$$</p>
-<p>初始状态：$dp[0]=1$，第一个丑数为1</p>
-<p>返回值：dp[n-1]</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">nthUglyNumber</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
-        dp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> n 
-        a<span class="token punctuation">,</span>b<span class="token punctuation">,</span>c <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">,</span><span class="token number">0</span>
-        <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            n2<span class="token punctuation">,</span>n3<span class="token punctuation">,</span>n5 <span class="token operator">=</span> dp<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">,</span>dp<span class="token punctuation">[</span>b<span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">3</span><span class="token punctuation">,</span>dp<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">5</span>
-            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> min<span class="token punctuation">(</span>n2<span class="token punctuation">,</span>n3<span class="token punctuation">,</span>n5<span class="token punctuation">)</span>
-            <span class="token keyword">if</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>n2<span class="token punctuation">:</span>
-                a<span class="token operator">+=</span><span class="token number">1</span>
-            <span class="token keyword">if</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>n3<span class="token punctuation">:</span>
-                b<span class="token operator">+=</span><span class="token number">1</span>
-            <span class="token keyword">if</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>n5<span class="token punctuation">:</span>
-                c<span class="token operator">+=</span><span class="token number">1</span>
-        <span class="token keyword">return</span> dp<span class="token punctuation">[</span>n<span class="token number">-1</span><span class="token punctuation">]</span>
-</code></pre>
-<p>Java版本</p>
-<pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">nthUglyNumber</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">int</span> a<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>b<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">,</span>c<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dp <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>n<span class="token punctuation">]</span><span class="token punctuation">;</span>
-        dp<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 从1开始执行</span>
-        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>i<span class="token operator">&lt;</span>n<span class="token punctuation">;</span>i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-            <span class="token keyword">int</span> n2 <span class="token operator">=</span> dp<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> n3 <span class="token operator">=</span> dp<span class="token punctuation">[</span>b<span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">3</span><span class="token punctuation">;</span>
-            <span class="token keyword">int</span> n5 <span class="token operator">=</span> dp<span class="token punctuation">[</span>c<span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">5</span><span class="token punctuation">;</span>
-            dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>Math<span class="token punctuation">.</span><span class="token function">min</span><span class="token punctuation">(</span>n2<span class="token punctuation">,</span>n3<span class="token punctuation">)</span><span class="token punctuation">,</span>n5<span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>n2<span class="token punctuation">)</span> a<span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>n3<span class="token punctuation">)</span> b<span class="token operator">++</span><span class="token punctuation">;</span>
-            <span class="token keyword">if</span><span class="token punctuation">(</span>dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>n5<span class="token punctuation">)</span> c<span class="token operator">++</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> dp<span class="token punctuation">[</span>n<span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<h3 id="2-最小堆"><a href="#2-最小堆" class="headerlink" title="2. 最小堆"></a>2. 最小堆</h3><p>这里使用python自带的小顶堆。每次从堆顶取出一个元素，用该元素分别乘2,3,5。将新得到的丑数加入到堆当中。需要注意的是，这里可能会出现重复元素，所以我们设置一个set记录出现过的元素。</p>
-<pre class=" language-python"><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">Solution</span><span class="token punctuation">:</span>
-    <span class="token keyword">def</span> <span class="token function">nthUglyNumber</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">:</span> int<span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
-        primes<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span>
-        seen<span class="token operator">=</span><span class="token punctuation">{</span><span class="token number">1</span><span class="token punctuation">}</span>
-        heap<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
-        <span class="token keyword">for</span> _ <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            cur <span class="token operator">=</span> heapq<span class="token punctuation">.</span>heappop<span class="token punctuation">(</span>heap<span class="token punctuation">)</span>
-            <span class="token keyword">for</span> prime <span class="token keyword">in</span> primes<span class="token punctuation">:</span>
-                next <span class="token operator">=</span> cur <span class="token operator">*</span> prime
-                <span class="token keyword">if</span> next <span class="token operator">not</span> <span class="token keyword">in</span> seen<span class="token punctuation">:</span>
-                    seen<span class="token punctuation">.</span>add<span class="token punctuation">(</span>next<span class="token punctuation">)</span>
-                    heapq<span class="token punctuation">.</span>heappush<span class="token punctuation">(</span>heap<span class="token punctuation">,</span>next<span class="token punctuation">)</span>
-        <span class="token keyword">return</span> heapq<span class="token punctuation">.</span>heappop<span class="token punctuation">(</span>heap<span class="token punctuation">)</span>
-</code></pre>
-<h3 id="3-超级丑数-通解"><a href="#3-超级丑数-通解" class="headerlink" title="3. 超级丑数 通解"></a>3. 超级丑数 通解</h3><pre class=" language-python"><code class="language-python"><span class="token keyword">def</span> <span class="token function">nthSuperUglyNumber</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> n<span class="token punctuation">:</span> int<span class="token punctuation">,</span> primes<span class="token punctuation">:</span> List<span class="token punctuation">[</span>int<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">-</span><span class="token operator">></span> int<span class="token punctuation">:</span>
-    np <span class="token operator">=</span> len<span class="token punctuation">(</span>primes<span class="token punctuation">)</span>
-    inx <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">*</span> np
-    dp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">*</span> n
-    <span class="token keyword">for</span> i <span class="token keyword">in</span> range<span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span>n<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        tmp <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
-        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>np<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            tmp<span class="token punctuation">.</span>append<span class="token punctuation">(</span>primes<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">*</span>dp<span class="token punctuation">[</span>inx<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
-        dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> min<span class="token punctuation">(</span>tmp<span class="token punctuation">)</span>
-        <span class="token keyword">for</span> j <span class="token keyword">in</span> range<span class="token punctuation">(</span>np<span class="token punctuation">)</span><span class="token punctuation">:</span>
-            <span class="token keyword">if</span> dp<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">==</span>primes<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">*</span>dp<span class="token punctuation">[</span>inx<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">:</span>inx<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token operator">+=</span><span class="token number">1</span>
-    <span class="token keyword">return</span> dp<span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
-</code></pre>
+                <h3 id="1-集成学习"><a href="#1-集成学习" class="headerlink" title="1.集成学习"></a>1.集成学习</h3><p>集成学习两种普遍方法：<code>bagging</code>集成和<code>bossting</code>集成，<code>bagging</code>集成，例如随机森林，对样本随机抽样建立很多树，每棵树之间没有关联，这些树组成森林，构成随机森林模型。<code>boosting</code>集成后一个模型是对前一个模型产生误差的矫正。而<code>gradient boost</code>是指每个新模型的引入是为了减少上个模型的残差(<strong>residual</strong>)，而为了消除残差，我们可以在残差减少的梯度(<strong>Gradient</strong>)方向上建立一个新的模型，如果基础模型是决策树，那么这样的模型就被称为Gradient Boost Decision Tree（<strong>GBDT</strong>）。</p>
+<h3 id="2-XGBoost"><a href="#2-XGBoost" class="headerlink" title="2. XGBoost"></a>2. XGBoost</h3><p><strong>xgboost（eXtreme Gradient Boosting）</strong>是最近提出的一个新的GBDT实现，优点有：</p>
+<p>1.显示的把树模型复杂度作为正则项加到优化目标中</p>
+<p>2.公式推导中用到了二阶导数，用了二阶泰勒展开</p>
+<p>3.实现了分裂点寻找近似算法</p>
+<p>4.利用了特征的稀疏性</p>
+<p>5.数据事先排序并且以block形式存储，有利于并行计算</p>
+<p>6.基于分布式通信框架<strong>rabit</strong>，可以运行在MPI和yarn上</p>
+<p>7.实现做了面向体系结构的优化，针对<strong>cache</strong>和内存做了性能优化</p>
+<h4 id="CART-原理"><a href="#CART-原理" class="headerlink" title="CART 原理"></a>CART 原理</h4><p>CART是决策树算法之一，可用于分类问题也可以用于回归问题，在节点分支的时候，它每次仅分成左、右两个节点，即它假设决策树是二叉树，CART树的生成就是递归地构建二叉决策树的过程，对回归树用<strong>平方误差</strong>最小化准则，对分类树用<strong>基尼指数</strong>最小化准则，进行特征选择，生成二叉树。</p>
+<p>假设有<code>K</code>个类，样本点属于<code>k</code>类的概率为$p_k$，则概率分布的基尼指数定义为：<br>$$<br>Gini(p)=\sum ^{K} <em>{k=1}p_k(1-p_k)=1-\sum^{K}</em>{k=1}p^2_{k}<br>$$<br>对于给定的样本集合<code>D</code>，其基尼指数为：<br>$$<br>Gini(D)=1-\sum^{K}<em>{k=1}(\frac{|c_k|}{|D|})^2<br>$$<br>这里，$c_k$是$D$中属于第$k$类的样本子集，$K$是类的个数。如果样本集合$D$根据特征$A$是否取某一可能值$a$被分隔成$D_1$和$D_2$两部分，即：<br>$$<br>D_1={(x,y)\in D|A(x)=a}, D_2=D-D_1<br>$$<br>则在特征$A$条件下，集合$D$的基尼指数定义为：<br>$$<br>Gini(D,A)=\frac{D_1}{D}Gini(D_1)+\frac{D_2}{D}Gini(D_2)<br>$$<br>基尼指数<code>Gini(D)</code>表示集合的不确定性，基尼指数<code>Gini(D,A)</code>表示经<code>A=a</code>分割后集合<code>D</code>的不确定性。基尼指数值越大，样本集合的不确定性也就越大。计算$Gini(D_1)$时，即计算$D_1$中各$k$类子集在$D_1$中占比，即：<br>$$<br>Gini(D_1)=1-\sum^{K}</em>{k=1}(\frac{|c_k|}{|D_1|})^2<br>$$<br>是$D_1$中属于第$k$类的样本子集，$K$是类的个数.</p>
+<h5 id="CART分类树建立算法流程"><a href="#CART分类树建立算法流程" class="headerlink" title="CART分类树建立算法流程"></a>CART分类树建立算法流程</h5><p><strong>算法输入：</strong>训练集$D$，基尼系数阈值，样本个数阈值</p>
+<p><strong>算法输出：</strong> 决策树<strong>T</strong></p>
+<p>1). 当前节点数据集为$D$，如果样本个数小于阈值或没有特征，返回决策树，停止递归</p>
+<p>2). 计算样本集$D$的基尼系数，如果基尼系数小于阈值，返回决策子树，当前节点停止递归</p>
+<p>3). 计算当前节点现有的各个特征值对数据集$D$的基尼系数</p>
+<p>4). 在计算出来的各个特征的各个特征值对数据集$D$的基尼系数中，选择基尼系数最小的特征$A$和对应的特征值$a$，根据这个最优特征和最优特征值，把数据集划分成两部分$D_1$和$D_2$，同时建立当前节点的左右节点，左节点的数据集$D$为$D_1$，右节点的数据集$D$为$D_2$。</p>
+<p>5). 对左右的子节点递归调用1~4步，生成决策树。</p>
+<h5 id="CART回归树建立算法"><a href="#CART回归树建立算法" class="headerlink" title="CART回归树建立算法"></a>CART回归树建立算法</h5><p>CART回归树的度量目标是，对于任意划分特征$A$，对应的任意划分点$s$两边划分成的数据集$D_1$和$D_2$，求出使$D_1$和$D_2$各自集合的均方差最小，同时$D_1$和$D_2$的均方差之和最小所对应的特征和特征值划分点，即：<br>$$<br>\underbrace{min}<em>{A,s}[\underbrace{min}</em>{c_1}\sum_{x_i\in D_1(A,s)}(y_i-c_1)^2+\underbrace{min}<em>{c_2}\sum</em>{x_i\in D_2(A,s)}(y_i-c_2)^2]<br>$$<br>$c_1$是数据集$D_1$数据集的样本输出均值，$c_2$是$D_2$数据集的样本输出均值。</p>
+<p>　对于决策树建立后做预测的方式，CART分类树采用叶子节点里概率最大的类别作为当前节点的预测类别。而回归树输出不是类别，它采用的是用最终叶子的均值或者中位数来预测输出结果。</p>
+<h5 id="CART-树的剪枝"><a href="#CART-树的剪枝" class="headerlink" title="CART 树的剪枝"></a>CART 树的剪枝</h5><p>剪枝分为两步：第一步是从原始决策树生成各种剪枝效果的决策树，第二步是用交叉验证来检验剪枝后的预测能力，选择泛化预测能力最好的剪枝后的树作为最终的CART树。</p>
+<p>剪枝过程中，对于任意的一刻子树$T$,其损失函数为：<br>$$<br>C_{\alpha}(T_t)=C(T_t)+\alpha|T_t|<br>$$<br>其中，$\alpha$ 为正则化参数，这个线性回归正则化一样，$C(T_t)$ 为训练数据的预测误差，分类树是基尼系数度量，回归树使用均方差度量，$|T_t|$ 是子树$T$的叶子节点的数量。$\alpha =0$时，没有正则化，原始的生成的CART树即为最优子树，当 $\alpha =\infty$时，正则化的强度最大，此时由原始的生成的CART树的根节点组成的单节点树为最优子树，$\alpha$ 越大，剪枝越厉害，生成的最优子树相比原生决策树就越偏小。</p>
+<p>对于任意一颗子树$T_t$ ，如果没有剪枝，损失是：<br>$$<br>C_{\alpha}(T_t)=C(T_t)+\alpha|T_t|<br>$$<br>如果将其剪掉，仅仅保留根节点，则损失是：<br>$$<br>C_{\alpha}(T)=C(T)+\alpha<br>$$<br>当$\alpha=0$ 或者$\alpha$ 很小的时候，$C_{\alpha}(T_t)&lt;C_{\alpha}(T)$,当$\alpha$ 增大到一定的程度时<br>$$<br>C_{\alpha}(T_t)=C_{\alpha}(T)<br>$$<br>当$\alpha$  继续增大时，不等式反向，如果满足<br>$$<br>\alpha=\frac{C(T)-C(T_t)}{|T_t|-1}<br>$$<br>$T_t$和$T$有相同的损失函数，但是$T$的节点更少，因此可以对$T_t$进行剪枝，就是将它的子节点全部剪掉，变为一个叶子节点$T$。</p>
 
                 
             </div>
@@ -587,7 +526,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://absent1353.github.io/2021/04/11/LeetCode-264-%E4%B8%91%E6%95%B0II/">https://absent1353.github.io/2021/04/11/LeetCode-264-%E4%B8%91%E6%95%B0II/</a>
+                    <a href="https://absent1353.github.io/2020/08/14/Xgboost/">https://absent1353.github.io/2020/08/14/Xgboost/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -625,8 +564,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%9C%80%E5%B0%8F%E5%A0%86/">
-                                    <span class="chip bg-color">动态规划,最小堆</span>
+                                <a href="/tags/Ensemble/">
+                                    <span class="chip bg-color">Ensemble</span>
                                 </a>
                             
                         </div>
@@ -802,13 +741,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/04/11/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E7%BA%BF%E6%80%A7%E8%A1%A8/">
+                <a href="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="大话数据结构之线性表">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="深度学习之WordEmbedding">
                         
-                        <span class="card-title">大话数据结构之线性表</span>
+                        <span class="card-title">深度学习之WordEmbedding</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -819,14 +758,14 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-11
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-28
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" class="post-category">
-                                    编程基础
+                            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-category">
+                                    深度学习
                                 </a>
                             
                             
@@ -836,8 +775,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-                        <span class="chip bg-color">数据结构</span>
+                    <a href="/tags/NLP/">
+                        <span class="chip bg-color">NLP</span>
                     </a>
                     
                 </div>
@@ -848,16 +787,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+                本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2021/04/11/LeetCode-338-%E6%AF%94%E7%89%B9%E4%BD%8D%E8%AE%A1%E6%95%B0/">
+                <a href="/2020/08/14/Xgboost/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="LeetCode-338-比特位计数">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="Xgboost1">
                         
-                        <span class="card-title">LeetCode-338-比特位计数</span>
+                        <span class="card-title">Xgboost1</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -868,25 +807,26 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-14
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%8A%9B%E6%89%A3/" class="post-category">
-                                    力扣
+                            <a href="/categories/Machine-learning/" class="post-category">
+                                    Machine learning
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E4%BD%8D%E8%BF%90%E7%AE%97/">
-                        <span class="chip bg-color">位运算</span>
+                    <a href="/tags/Ensemble/">
+                        <span class="chip bg-color">Ensemble</span>
                     </a>
                     
                 </div>
@@ -1088,7 +1028,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2019-2021</span>
+                <span id="year">2019-2022</span>
             
             <span id="year">2019</span>
             <a href="/about" target="_blank">Peng Zhang</a>
