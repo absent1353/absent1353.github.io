@@ -487,14 +487,14 @@
 </li>
 </ol>
 <h3 id="4-3-BN实现"><a href="#4-3-BN实现" class="headerlink" title="4.3 BN实现"></a>4.3 BN实现</h3><p>BN的过程为</p>
-<p>​                      $$y=\frac{x-\bf{E}[x]}{\sqrt{\bf{Var[x]+\epsilon}}}*\gamma+\beta \tag{1}$$</p>
+<p>​                      <script type="math/tex">y=\frac{x-\bf{E}[x]}{\sqrt{\bf{Var[x]+\epsilon}}}*\gamma+\beta \tag{1}</script></p>
 <p>BN实际上是先对每一层的输出做一个标准正态分布的转换，然后对输出做一个仿射（affine）变换。这个过程中仿射变换的参数$\gamma$和$\beta$ 是可以<strong>学习的参数</strong>，通过反向传播进行更新，在<strong>Pytorch</strong>中是可以通过控制<code>affine=True/False</code>来指定这两个参数是否在网络的Backward的时候被学习，Pytorch中$\gamma$ 从<code>(0,1)</code>采样，$\beta$初始化为0。</p>
-<pre class=" language-python"><code class="language-python">torch<span class="token punctuation">.</span>nn<span class="token punctuation">.</span>BatchNorm2d<span class="token punctuation">(</span>num_features<span class="token punctuation">,</span> eps<span class="token operator">=</span><span class="token number">1e</span><span class="token operator">-</span><span class="token number">05</span><span class="token punctuation">,</span> momentum<span class="token operator">=</span><span class="token number">0.1</span><span class="token punctuation">,</span> affine<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">,</span> 
-                     track_running_stats<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span>
+<pre class=" language-lang-python"><code class="language-lang-python">torch.nn.BatchNorm2d(num_features, eps=1e-05, momentum=0.1, affine=True, 
+                     track_running_stats=True)
 </code></pre>
 <p>关于BN的公式如下：</p>
-<p>​                                                       $$\mu_{\mathbf{\beta}} \leftarrow \frac{1}{m}\sum _\limits{i=1}^{m} x_i$$                    // mini-batch mean</p>
-<p>​                                                        $$\sigma_{\mathbf{\beta}}^2 \leftarrow \frac{1}{m}\sum <em>\limits{i=1}^{m}(x_i-\mu</em>{\beta})^2$$              // mini-batch variance</p>
+<p>​                                                       <script type="math/tex">\mu_{\mathbf{\beta}} \leftarrow \frac{1}{m}\sum _\limits{i=1}^{m} x_i</script>                    // mini-batch mean</p>
+<p>​                                                        <script type="math/tex">\sigma_{\mathbf{\beta}}^2 \leftarrow \frac{1}{m}\sum _\limits{i=1}^{m}(x_i-\mu_{\beta})^2</script>              // mini-batch variance</p>
 <h2 id="5-Encoder架构"><a href="#5-Encoder架构" class="headerlink" title="5. Encoder架构"></a>5. Encoder架构</h2><h2 id="6-Decoder架构"><a href="#6-Decoder架构" class="headerlink" title="6. Decoder架构"></a>6. Decoder架构</h2>
                 
             </div>

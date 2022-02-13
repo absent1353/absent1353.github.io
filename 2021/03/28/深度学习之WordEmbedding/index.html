@@ -483,16 +483,14 @@
 <p>将文本分解成的单元叫做<strong>标记（token）</strong>，将文本分解成标记的过程叫做<strong>分词（tokenization）</strong>。</p>
 <h2 id="2-one-hot向量"><a href="#2-one-hot向量" class="headerlink" title="2.one-hot向量"></a>2.one-hot向量</h2><p>最简单的方法就是one-hot表示，如果词典大小为4，可以用以下图示表示(实际通常要几万)，每个词对应一个下表，每个词都用长度为4向量表示，只有对应的下标为1，其余为零，第一个词是[1, 0, 0, 0]，而第三个词是[0, 0, 1, 0]。</p>
 <img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/one-hot.jpg" class="" title="one-hot图示">
-
 <p>one-hot的问题是不满足我们前面的期望：<strong>相似的词的距离较近而不相似的较远</strong>。对于one-hot向量来说，相同的词距离是0，而不同的词距离是1。这显然是有问题的，因为cat和dog的距离肯定要比cat和apple要远。但是在one-hot的表示里，cat和其它任何词的距离都是1。此外，one-hot的问题在于它是一个高维(通常几万甚至几十万)的稀疏(只有一个1)向量。我们希望用一个低维的稠密的向量来表示一个词，我们期望每一维都是表示某种语义。比如第一维代表动物(当然这只是假设)，那么cat和dog在这一维的值都比较大，而apple在这一维的值比较小。这样cat和dog的距离就比cat和apple要近。</p>
 <h2 id="3-神经网络语言模型"><a href="#3-神经网络语言模型" class="headerlink" title="3.神经网络语言模型"></a>3.神经网络语言模型</h2><p>给定词序列$w_1,…,w_k$，语言模型会计算这个序列的概率，根据条件概率的定义，联合概率如下：</p>
-<p>​                      $$P(w)=\prod \limits_{k=1}^{K}P(w_k|w_{k-1},w_{k-2},…,w_1) \tag{1}$$</p>
+<p>​                      <script type="math/tex">P(w)=\prod \limits_{k=1}^{K}P(w_k|w_{k-1},w_{k-2},...,w_1) \tag{1}</script></p>
 <p>实际语言模型会考虑特别长历史，但是会限定当前词的概率值依赖与之前的$N-1$ 个词，这就是<code>N-Gram</code>语言模型，也就是将式(1)改写为：</p>
-<p>​                   $$P(w)=\prod \limits_{k=1}^{K}P(w_k|w_{k-1},w_{k-2},…,w_{k-N+1}) \tag{2}$$</p>
+<p>​                   <script type="math/tex">P(w)=\prod \limits_{k=1}^{K}P(w_k|w_{k-1},w_{k-2},...,w_{k-N+1}) \tag{2}</script></p>
 <p>衡量模型好坏采用困惑度(Perplexity)来表征：</p>
-<p>$$ \begin{split}H&amp;=-\lim \limits_{K\to \infty}\frac{1}{K}\log_2P(w_1,…,w_K)\&amp; \approx \lim\frac{1}{K}\sum \limits_{k=1}^K\log_2P(w_k|w_{k-1},…,w_{k-N+1}) \end{split} \tag{3}$$</p>
-<p><code>N-Gram</code>语言模型可以通过最大似然方法来估计参数，假设$C(w_{k-2}w_{k-1}w_k)$表示三个词$w_{k-2}w_{k-1}w_k$连续出现在一起的次数，类似$C(w_{k-2}w_{k-1})$表示两个词$w_{k-2}w_{k-1}$连续出现在一起的次数，则</p>
-<p>​            $$P(w_k|w_{k-1}w_{k-2})=\frac{C(w_{k-2}w_{k-1}w_k)}{C(w_{k-2}w_{k-1})} \tag{4}$$</p>
+<script type="math/tex; mode=display">\begin{split}H&=-\lim \limits_{K\to \infty}\frac{1}{K}\log_2P(w_1,...,w_K)\\& \approx \lim\frac{1}{K}\sum \limits_{k=1}^K\log_2P(w_k|w_{k-1},...,w_{k-N+1}) \end{split} \tag{3}</script><p><code>N-Gram</code>语言模型可以通过最大似然方法来估计参数，假设$C(w_{k-2}w_{k-1}w_k)$表示三个词$w_{k-2}w_{k-1}w_k$连续出现在一起的次数，类似$C(w_{k-2}w_{k-1})$表示两个词$w_{k-2}w_{k-1}$连续出现在一起的次数，则</p>
+<p>​            <script type="math/tex">P(w_k|w_{k-1}w_{k-2})=\frac{C(w_{k-2}w_{k-1}w_k)}{C(w_{k-2}w_{k-1})} \tag{4}</script></p>
 <p>最大似然估计的最大问题是数据的稀疏性，如果3个词没有在训练数据中一起出现过，那么概率就是0，但不在训练数据里出现不代表它不是合理的句子。实际一般会使用打折(Discount)和回退(Backoff)等平滑方法来改进最大似然估计。打折的意思就是把一些高频N-Gram的概率分配给从没有出现过的N-Gram，回退就是如果N-Gram没有出现过，我们就用(N-1)-Gram来估计。</p>
 <p><code>N-Gram</code>存在的问题：</p>
 <ol>
@@ -502,58 +500,43 @@
 <p>比如训练数据中有”我 在 北京”，但是没有”我 在 上海”，那么$p(上海|在)$的概率就会比$p(北京|在)$小很多。但是我们人能知道”上海”和”北京”有很多相似的地方，作为一个地名，都可以出现在”在”的后面。</p>
 <p>通过把一个词表示成一个低维稠密的向量就能解决这个问题，通过上下文，模型能够知道北京和上海经常出现在相似的上下文里，因此模型能用相似的向量来表示这两个不同的词。</p>
 <img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B.jpg" class="" title="神经网络语言模型图示">
-
 <p>这个模型的输入是当前要预测的词，比如用前两个词预测当前词。模型首先用lookup table把一个词变成一个向量，然后把这两个词的向量拼接成一个大的向量，输入神经网络，最后使用softmax输出预测每个词的概率。</p>
 <h2 id="4-Word2Vec"><a href="#4-Word2Vec" class="headerlink" title="4.Word2Vec"></a>4.Word2Vec</h2><p>Word2Vec直接用于训练词向量，训练速度比语言模型快很多，其基本思想是：如果两个词的上下文相似，那么这两个词的语义就相似。上下文有很多粒度，比如文档的粒度，也就是一个词的上下文是所有与它出现在同一个文档中的词。也可以是较细的粒度，比如当前词前后固定大小的窗口。总结为一个词的语义可以由它的上下文来确定，word2vec有两个模型：CBOW(Continuous Bag-of-Word)和SG(Skip-Gram)模型。</p>
 <img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/%E8%AF%8D%E7%9A%84%E4%B8%8A%E4%B8%8B%E6%96%87.jpg" class="" title="词的上下文图示(CS224N)">
-
 <h3 id="4-1-CBOW"><a href="#4-1-CBOW" class="headerlink" title="4.1.CBOW"></a>4.1.CBOW</h3><p>词典大小为V(词的个数)，隐层的单元个数为N，输入-隐层以及隐层-输出层是全连接的网络层。输入向量是one-hot的表示，也就是$x_1,x_2,…,x_V$里只有一个1，其余全是0，输入层和隐层的参数是一个V✖N的矩阵W，W的每一行是一个D维的向量$v_w$，这个向量对应输入的词w，假设输入的词(上下文)是w，对应下表为k，它的one-hot表示x只有第k维是1，其余都是0，写作：</p>
-<p>​                                                        $$h=W^Tx=W_{k,}^T=W_{wI}^T \tag{5}$$</p>
+<p>​                                                        <script type="math/tex">h=W^Tx=W_{k,}^T=W_{wI}^T \tag{5}</script></p>
 <img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/%E5%9F%BA%E7%A1%80CBOW%E6%A8%A1%E5%9E%8B.jpg" class="" title="基础的CBOW模型(word2vec Parameter Learning Explainedhttps:&#x2F;&#x2F;arxiv.org&#x2F;abs&#x2F;1411.2738)">
-
 <p>因此隐层的输出h其实就是输入词$w_I$对应的第$k$行这个向量，由于x的one-hot特性，我们计算h的时候并不需要真的进行矩阵向量乘法，在word2vec的隐层，我们一般不使用激活函数。只需要找到x对应的那一行就好了，举例如下：</p>
 <img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/%E9%9A%90%E5%B1%82%E8%BE%93%E5%87%BA.jpg" class="" title="one-hot对应的隐层输出(Row vector)">
-
 <p>隐层到输出层的参数矩阵是一个$N*V$的矩阵$W’$(这里$W’$只是表示和W不同第一个矩阵而已),使用它我们可以计算输出第$j$个词的得分$u_j$为：</p>
-<p>​                                                                      $$u_j = v_{wj}^{‘T}h\tag{6}$$</p>
+<p>​                                                                      <script type="math/tex">u_j = v_{wj}^{'T}h\tag{6}</script></p>
 <p>$v_{wj}^{‘T}$表示的是$W’$的第$j$列，获取输出概率，对所有的$u_j$进行softmax：</p>
-<p>​                                                                             $$P(w_j|w_I) = y_j= \frac{\exp(u_j)}{\sum_{j^{‘}=1}^{V}\exp(u_{j^{‘}})} \tag{7}$$</p>
+<p>​                                                                             <script type="math/tex">P(w_j|w_I) = y_j= \frac{\exp(u_j)}{\sum_{j^{'}=1}^{V}\exp(u_{j^{'}})} \tag{7}</script></p>
 <p>结合(5)和(6)，式(7)为：</p>
-<p>$$P(w_j|w_I) = y_j= \frac{\exp(v_{wj}^{‘T}v_{wI})}{\sum_{j^{‘}=1}^{V}\exp(v_{wj}^{‘T}v_{wI})}  \tag{8}$$</p>
-<p>$v_w$和$v_w^{‘}$是词$w$的两种向量表示，$v_w$来自矩阵$W$的某一行，叫做输入向量，而$v_w^{‘}$来自矩阵$W’$的某一列，叫做输出向量，如果输入词$w_I$和输出词$w_j$的词向量内积比较大，说明它们比较相似，$P(w_j|w_I)$就比较大。</p>
+<script type="math/tex; mode=display">P(w_j|w_I) = y_j= \frac{\exp(v_{wj}^{'T}v_{wI})}{\sum_{j^{'}=1}^{V}\exp(v_{wj}^{'T}v_{wI})}  \tag{8}</script><p>$v_w$和$v_w^{‘}$是词$w$的两种向量表示，$v_w$来自矩阵$W$的某一行，叫做输入向量，而$v_w^{‘}$来自矩阵$W’$的某一列，叫做输出向量，如果输入词$w_I$和输出词$w_j$的词向量内积比较大，说明它们比较相似，$P(w_j|w_I)$就比较大。</p>
 <h3 id="4-2-CBOW的反向传播"><a href="#4-2-CBOW的反向传播" class="headerlink" title="4.2 CBOW的反向传播"></a>4.2 CBOW的反向传播</h3><p>首先计算隐层到输出层参数$W$的梯度,损失函数是交叉熵损失函数,给定输入$w_I$,输出是$w_O$ , 假设$w_O$对应的下标是$j^*$ ,损失函数$E$的计算公式为:</p>
-<p>​                                         $$E = -\log y_j^{*} = -u_j + \log\sum_{j^{‘}=1}^{V}\exp(u_{j^{‘}}) \tag{9}$$</p>
+<p>​                                         <script type="math/tex">E = -\log y_j^{*} = -u_j + \log\sum_{j^{'}=1}^{V}\exp(u_{j^{'}}) \tag{9}</script></p>
 <p>求$E$ 对 $u_j$ 偏导数为:</p>
-<p>​                                                                                       $$\frac{\partial E}{\partial u_j} =-t_j+\frac{\exp(u_j)}{\sum_{j^{‘}=1}^{V}\exp(u_{j^{‘}})}=y_j-t_j=e_j \tag{10}$$</p>
+<p>​                                                                                       <script type="math/tex">\frac{\partial E}{\partial u_j} =-t_j+\frac{\exp(u_j)}{\sum_{j^{'}=1}^{V}\exp(u_{j^{'}})}=y_j-t_j=e_j \tag{10}</script></p>
 <p>如果这个差值很大,说明模型预测的不好,参数需要调整很大,反之则不需要调整参数,根据链式法则,求E对参数$w_{ij}^{‘}$的导数:</p>
-<p>$$\frac{\partial E}{\partial w_{ij}^{‘}}=\frac{\partial E}{\partial u_j}\frac{\partial u_j}{\partial w_{ij}^{‘}}=e_j \cdot h_i \tag{11}$$</p>
-<p>采用Gradient Descent更新参数:</p>
-<p>​                                                              $$w_{ij}^{‘new} = w_{ij}^{‘old}-\eta \cdot e_j \cdot h_i \tag{12}$$</p>
+<script type="math/tex; mode=display">\frac{\partial E}{\partial w_{ij}^{'}}=\frac{\partial E}{\partial u_j}\frac{\partial u_j}{\partial w_{ij}^{'}}=e_j \cdot h_i \tag{11}</script><p>采用Gradient Descent更新参数:</p>
+<p>​                                                              <script type="math/tex">w_{ij}^{'new} = w_{ij}^{'old}-\eta \cdot e_j \cdot h_i \tag{12}</script></p>
 <p>求$E$对隐层的输出$h_i$的梯度:</p>
-<p>​                                                                               $$\frac{\partial E}{\partial h_i} = \sum \limits_{j=1}^V \frac{\partial E}{\partial u_j} \frac{\partial u_j}{\partial h_i} =\sum \limits_{j=1}{V}e_j \cdot w_{ij}^{‘} = EH_i\tag{13}$$</p>
+<p>​                                                                               <script type="math/tex">\frac{\partial E}{\partial h_i} = \sum \limits_{j=1}^V \frac{\partial E}{\partial u_j} \frac{\partial u_j}{\partial h_i} =\sum \limits_{j=1}{V}e_j \cdot w_{ij}^{'} = EH_i\tag{13}</script></p>
 <p>由于$h_i = \sum_{k=1}^{V} x_k \cdot w_{ki}$, 所以可以求出:</p>
-<p>$$\frac{\partial E}{\partial w_{ki}} = \frac{\partial E}{\partial h_i} \cdot \frac{\partial h_i}{\partial w_{ki}} = EH_i \cdot x_k \tag{14}$$</p>
-<p>向量形式为$\frac{\partial E}{\partial W} = X \bigotimes EH^T$,是一个$V \times N$ 的矩阵, 但是$x$ 只有一个元素非零,因此$\frac{\partial E}{\partial W}$只有一个行非零,所以梯度下降对于W只需要更新输入$w_I$ 对应的那一个(行)向量</p>
-<p>​                                                             $$v_{w_I}^{new} \leftarrow v_{w_I}^{old} - \eta EH^T  \tag{15}$$</p>
+<script type="math/tex; mode=display">\frac{\partial E}{\partial w_{ki}} = \frac{\partial E}{\partial h_i} \cdot \frac{\partial h_i}{\partial w_{ki}} = EH_i \cdot x_k \tag{14}</script><p>向量形式为$\frac{\partial E}{\partial W} = X \bigotimes EH^T$,是一个$V \times N$ 的矩阵, 但是$x$ 只有一个元素非零,因此$\frac{\partial E}{\partial W}$只有一个行非零,所以梯度下降对于W只需要更新输入$w_I$ 对应的那一个(行)向量</p>
+<p>​                                                             <script type="math/tex">v_{w_I}^{new} \leftarrow v_{w_I}^{old} - \eta EH^T  \tag{15}</script></p>
 <h3 id="4-3-Multi-word-CBOW模型"><a href="#4-3-Multi-word-CBOW模型" class="headerlink" title="4.3.Multi-word CBOW模型"></a>4.3.Multi-word CBOW模型</h3><img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/Multi-word.jpg" class="" title="多个单词输入的CBOW模型">
-
 <p>用one-hot表示每个词，把多个向量输入到CBOW模型，采用平均方法：</p>
-<p>$$\begin{split}h&amp;=\frac{1}{C}W^T(x_1+x_2+…+x_C) \\ &amp;= \frac{1}{C}(v_{w_1}+…+v_{wC})^T\end{split} \tag{16}$$</p>
-<p>一旦计算出$h$，后面的计算与普通的CBOW一致，计算损失为：</p>
-<p>$$\begin{split}E = -\log y_{j}^* &amp;= -u_j^*+\log(\sum \limits_{j^{‘}=1}^{V}\exp(u_{j’}))\\&amp;=-v_{w_O}^{‘T}\cdot h+\log(\sum\limits_{j’=1}^{V}\exp(v_{wj}^{‘T}\cdot h)) \end{split} \tag{17}$$</p>
-<p>梯度更新为：</p>
-<p> $$v_{w_I,c}^{new} \leftarrow v_{w_I,c}^{old} -\frac{1}{C} \eta EH^T  \tag{18}$$</p>
-<p>7.Skip-Gram模型</p>
+<script type="math/tex; mode=display">\begin{split}h&=\frac{1}{C}W^T(x_1+x_2+...+x_C) \\\\ &= \frac{1}{C}(v_{w_1}+...+v_{wC})^T\end{split} \tag{16}</script><p>一旦计算出$h$，后面的计算与普通的CBOW一致，计算损失为：</p>
+<script type="math/tex; mode=display">\begin{split}E = -\log y_{j}^* &= -u_j^*+\log(\sum \limits_{j^{'}=1}^{V}\exp(u_{j'}))\\\\&=-v_{w_O}^{'T}\cdot h+\log(\sum\limits_{j'=1}^{V}\exp(v_{wj}^{'T}\cdot h)) \end{split} \tag{17}</script><p>梯度更新为：</p>
+<script type="math/tex; mode=display">v_{w_I,c}^{new} \leftarrow v_{w_I,c}^{old} -\frac{1}{C} \eta EH^T  \tag{18}</script><p>7.Skip-Gram模型</p>
 <p>skip-Gram是用一个词来预测上下文：</p>
 <img src="/2021/03/28/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8BWordEmbedding/skip-gram.jpg" class="" title="skip-gram模型图示">
-
 <p>与CBOW模型一致，依然采用$v_{wI}$表示输入向量，隐层输出为$\bf{h}$，意味着$\bf{h}$简单拷贝输入-隐层的权重矩阵($\bf{W}$)一行，对于输出层，预测公式则表示为：</p>
-<p>$$P(w_{c,j}=W_{O,c}|w_I)=y_{c,j}=\frac{\exp(u_{c,j})}{\sum_{j’=1}^{V}\exp(u_{c,j’})} \tag{19}$$</p>
-<p>$w_I$是输入词，$w_{O,c}$是需要预测的第$c$个输出，而$u_{c,j}$ 是预测的第$c$个词为$j$的概率，公式计算为：</p>
-<p>$$u_{c,j}=u_j=v_{wj}^{T}\cdot h \ \ \ \mathrm{for} \ c = 1,2,…C \tag{20}$$</p>
-<p>其计算损失函数以及BP过程与CBOW类似，其中损失函数为：</p>
-<p>$$\begin{split}E &amp;= -\log P(w_{O,1},w_{O,2},…,w_{O,C}|w_I)\\&amp;=-\log\prod \limits_{c=1}^{C}\frac{exp(u_{c,j_c^*})}{\sum\limits_{j’=1}{V}\exp(u_{j’})}\\&amp;=-\sum\limits_{c=1}^{C}u_{j_c^*}+C\cdot \log \sum \limits_{j’=1}{V}\exp(u_{j’})\end{split}\tag{21}$$</p>
-<p>$j_c^*$是要预测的第$c$个词的下标，skip-gram与CBOW区别为E为多个词的损失函数。</p>
+<script type="math/tex; mode=display">P(w_{c,j}=W_{O,c}|w_I)=y_{c,j}=\frac{\exp(u_{c,j})}{\sum_{j'=1}^{V}\exp(u_{c,j'})} \tag{19}</script><p>$w_I$是输入词，$w_{O,c}$是需要预测的第$c$个输出，而$u_{c,j}$ 是预测的第$c$个词为$j$的概率，公式计算为：</p>
+<script type="math/tex; mode=display">u_{c,j}=u_j=v_{wj}^{T}\cdot h \ \ \ \mathrm{for} \ c = 1,2,...C \tag{20}</script><p>其计算损失函数以及BP过程与CBOW类似，其中损失函数为：</p>
+<script type="math/tex; mode=display">\begin{split}E &= -\log P(w_{O,1},w_{O,2},...,w_{O,C}|w_I)\\\\&=-\log\prod \limits_{c=1}^{C}\frac{exp(u_{c,j_c^*})}{\sum\limits_{j'=1}{V}\exp(u_{j'})}\\\\&=-\sum\limits_{c=1}^{C}u_{j_c^*}+C\cdot \log \sum \limits_{j'=1}{V}\exp(u_{j'})\end{split}\tag{21}</script><p>$j_c^*$是要预测的第$c$个词的下标，skip-gram与CBOW区别为E为多个词的损失函数。</p>
 <h2 id="5-实现"><a href="#5-实现" class="headerlink" title="5.实现"></a>5.实现</h2>
                 
             </div>
